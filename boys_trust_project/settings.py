@@ -11,11 +11,10 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 from pathlib import Path
 import os
-import dj_database_url  # <-- ADD THIS IMPORT
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
@@ -25,6 +24,7 @@ SECRET_KEY = 'django-insecure--=m@3j-@h2@j2=(=0x^51d31tqcn#t#n2gumypj8r(%_j7xk12
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
 ALLOWED_HOSTS = ['boysfoundation.in', 'www.boysfoundation.in', '.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Added WhiteNoise
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,25 +72,16 @@ WSGI_APPLICATION = 'boys_trust_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-import os
-import dj_database_url
 
-# Database configuration
-DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
-db_config = dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True) if DATABASE_URL else {}
 
-if db_config and 'NAME' in db_config:
-    DATABASES = {
-        'default': db_config
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
@@ -125,19 +116,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
-
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
-import os
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -154,6 +132,14 @@ STORAGES = {
 # Media files (User uploaded images like Logos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# Razorpay Credentials (Replace with your actual keys from Razorpay Dashboard)
+
+# Email
+MAILERS = {
+    'default': {
+        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+    },
+}
+
+# Razorpay Credentials
 RAZOR_KEY_ID = 'rzp_live_Tm7qWG9EH3nOW0'
 RAZOR_KEY_SECRET = 'SCKxbXHxRDRPQqMFEYQXSk9D'
