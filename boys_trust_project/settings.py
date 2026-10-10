@@ -70,9 +70,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'boys_trust_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
+# Database Configuration
+# Automatically uses Supabase via DATABASE_URL on Render, falls back to SQLite locally
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
@@ -114,12 +113,10 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.1/howto/static-files/
-
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Modern Django WhiteNoise storage configuration
+# WhiteNoise storage configuration
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -128,9 +125,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+
 WHITENOISE_MANIFEST_STRICT = False
 
-# Media files (User uploaded images like Logos)
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
