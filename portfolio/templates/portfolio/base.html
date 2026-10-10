@@ -267,7 +267,8 @@
     <!-- Header Navigation -->
     <header>
         <a href="/" class="brand-container">
-            <img src="{% static 'logo.png' %}" alt="Best_One_Young_Society Logo">
+            <!-- Updated path to look in images folder, falls back gracefully if missing -->
+            <img src="{% static 'images/logo.png' %}" alt="Best_One_Young_Society Logo" onerror="this.style.display='none'">
             <div class="brand-title">
                 <h2>Best_One_Young_Society</h2>
                 <p>Trust Registered 455/2024 — Serving Communities, Building Futures</p>
@@ -330,7 +331,7 @@
 
         <!-- Bottom Copyright Bar -->
         <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} <strong>Best_One_Young_Society</strong> (Reg. No: 268/2016). All Rights Reserved.</p>
+            <p>&copy; {% now "Y" %} <strong>Best_One_Young_Society</strong> (Reg. No: 455/2024). All Rights Reserved.</p>
         </div>
     </footer>
 
