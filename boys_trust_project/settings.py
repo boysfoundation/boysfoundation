@@ -24,7 +24,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['boysfoundation.in', 'www.boysfoundation.in', '.onrender.com', 'localhost', '127.0.0.1']
 
 
-# STATIC FILES (Must be defined BEFORE INSTALLED_APPS to prevent staticfiles app errors)
+# STATIC FILES CONFIGURATION (Must be defined BEFORE INSTALLED_APPS)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -127,7 +127,7 @@ STORAGES = {
 
 WHITENOISE_MANIFEST_STRICT = False
 
-# Email
+# Email configuration
 MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
