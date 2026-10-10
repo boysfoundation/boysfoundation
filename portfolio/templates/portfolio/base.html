@@ -30,6 +30,7 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            flex-wrap: wrap; /* Allows navigation to wrap neatly on mobile */
         }
 
         .brand-container {
@@ -42,6 +43,8 @@
         .brand-container img {
             height: 55px;
             width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
         }
 
         .brand-title h2 {
@@ -58,6 +61,11 @@
             font-weight: 500;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav a {
             color: #334155;
             text-decoration: none;
@@ -69,6 +77,57 @@
 
         nav a:hover {
             color: #2e6f40;
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 12px 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .brand-container {
+                gap: 10px;
+                width: 100%;
+            }
+
+            .brand-container img {
+                height: 40px; /* Scaled down logo for mobile */
+            }
+
+            .brand-title h2 {
+                font-size: 1.1rem; /* Compact heading for mobile screens */
+                line-height: 1.2;
+            }
+
+            .brand-title p {
+                font-size: 0.75rem;
+                line-height: 1.1;
+            }
+
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                overflow-x: auto; /* Allows smooth horizontal scrolling for nav links if needed */
+                padding-top: 8px;
+                border-top: 1px solid #f1f5f9;
+            }
+
+            nav a {
+                margin-left: 0;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+        }
+
+        /* Ultra-small screen optimizations (phones < 480px) */
+        @media screen and (max-width: 480px) {
+            .brand-title p {
+                display: none; /* Hides tagline on tiny screens for maximum clarity */
+            }
         }
 
         /* Main Container - Preserved */
@@ -175,15 +234,13 @@
 
     <!-- Header Navigation -->
     <header>
-        <a href="/" class="brand-container" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <img src="{% static 'logo.png' %}" 
-             alt="Best_One_Young_Society Logo" 
-             style="max-height: 50px; width: auto; object-fit: contain;">
-        <div class="brand-title">
-            <h2 style="margin: 0; font-size: 1.25rem;">Best_One _Young_Society</h2>
-            <p style="margin: 0; font-size: 0.85rem; color: #666;">Trust Registered 268/2016 — Serving Communities, Building Futures</p>
-        </div>
-    </a>
+        <a href="/" class="brand-container">
+            <img src="{% static 'logo.png' %}" alt="Best_One_Young_Society Logo">
+            <div class="brand-title">
+                <h2>Best_One _Young_Society</h2>
+                <p>Trust Registered 268/2016 — Serving Communities, Building Futures</p>
+            </div>
+        </a>
 
         <nav>
             <a href="/"><i class="fa-solid fa-house"></i> Home</a>
