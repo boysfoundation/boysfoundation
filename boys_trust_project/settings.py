@@ -76,15 +76,13 @@ import os
 import dj_database_url
 
 # Database configuration
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
 
-if DATABASE_URL:
+db_config = dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True) if DATABASE_URL else {}
+
+if db_config and 'NAME' in db_config:
     DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True
-        )
+        'default': db_config
     }
 else:
     DATABASES = {
@@ -93,7 +91,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
