@@ -267,13 +267,16 @@
     <!-- Header Navigation -->
     <header>
         <a href="/" class="brand-container">
-            <!-- Updated path to look in images folder, falls back gracefully if missing -->
-            <img src="{% static 'images/logo.png' %}" alt="Best_One_Young_Society Logo" onerror="this.style.display='none'">
-            <div class="brand-title">
-                <h2>Best_One_Young_Society</h2>
-                <p>Trust Registered 455/2024 — Serving Communities, Building Futures</p>
-            </div>
-        </a>
+    <!-- Tries loading logo.png directly from static, falls back to Font Awesome icon if file is missing -->
+    <img src="{% static 'logo.png' %}" alt="Best_One_Young_Society Logo" 
+         onerror="this.onerror=null; this.src='{% static 'images/logo.png' %}'; this.onerror=function(){ this.style.display='none'; document.getElementById('logo-icon-fallback').style.display='inline-block'; }">
+    <i id="logo-icon-fallback" class="fa-solid fa-hands-holding-child" style="display: none; font-size: 2rem; color: #1e3a8a;"></i>
+
+    <div class="brand-title">
+        <h2>Best_One_Young_Society</h2>
+        <p>Trust Registered 455/2024 — Serving Communities, Building Futures</p>
+    </div>
+</a>
 
         <nav>
             <a href="/"><i class="fa-solid fa-house"></i> Home</a>
