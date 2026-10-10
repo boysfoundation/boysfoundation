@@ -175,13 +175,15 @@
 
     <!-- Header Navigation -->
     <header>
-        <a href="/" class="brand-container">
-            <img src="{% static 'logo.png' %}" alt="Best_One_Young_Society Logo">
-            <div class="brand-title">
-                <h2>Best_One _Young_Society</h2>
-                <p>Trust Registered 268/2016 — Serving Communities, Building Futures</p>
-            </div>
-        </a>
+        <a href="/" class="brand-container" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="{% static 'logo.png' %}" 
+             alt="Best_One_Young_Society Logo" 
+             style="max-height: 50px; width: auto; object-fit: contain;">
+        <div class="brand-title">
+            <h2 style="margin: 0; font-size: 1.25rem;">Best_One _Young_Society</h2>
+            <p style="margin: 0; font-size: 0.85rem; color: #666;">Trust Registered 268/2016 — Serving Communities, Building Futures</p>
+        </div>
+    </a>
 
         <nav>
             <a href="/"><i class="fa-solid fa-house"></i> Home</a>
