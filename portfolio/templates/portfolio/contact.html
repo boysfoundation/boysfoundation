@@ -1,0 +1,182 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Contact Us - Best_One _Young_Society{% endblock title %}
+
+{% block content %}
+<style>
+    .contact-hero {
+        text-align: center;
+        padding: 45px 20px;
+        background: linear-gradient(135deg, #1e4d2b, #2e6f40);
+        color: white;
+        border-radius: 12px;
+        margin-bottom: 35px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .contact-hero h2 { font-size: 2.3rem; margin-bottom: 10px; }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .contact-info-card, .contact-form-card {
+        background: white;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .contact-info-card h3, .contact-form-card h3 {
+        color: #1e4d2b;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .info-box i {
+        font-size: 1.4rem;
+        color: #2e6f40;
+        background: #e8f5e9;
+        padding: 12px;
+        border-radius: 50%;
+    }
+    .info-content h4 { margin: 0 0 4px 0; color: #222; }
+    .info-content p { margin: 0; color: #666; font-size: 0.95rem; }
+
+    /* Form Inputs */
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #333; font-size: 0.95rem; }
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+        border-color: #2e6f40;
+        outline: none;
+    }
+
+    .btn-submit {
+        background-color: #2e6f40;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.3s;
+    }
+    .btn-submit:hover { background-color: #1e4d2b; }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 25px;
+        border: 1px solid #c3e6cb;
+    }
+</style>
+
+<div class="contact-hero">
+    <h2><i class="fa-solid fa-envelope-open-text"></i> Get in Touch</h2>
+    <p>Have questions, ideas, or want to collaborate with Best_One_Young_Society? We'd love to hear from you!</p>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-success">
+            <i class="fa-solid fa-circle-check"></i> {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="contact-grid">
+    <!-- Contact Info Column -->
+    <div class="contact-info-card">
+        <h3><i class="fa-solid fa-address-card"></i> Contact Details</h3>
+
+        <div class="info-box">
+            <i class="fa-solid fa-building-ngo"></i>
+            <div class="info-content">
+                <h4>Organization</h4>
+                <p>Best_One_Young_Society</p>
+                <p><small>Trust Reg. No: 455/2024</small></p>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <div class="info-content">
+                <h4>Address</h4>
+                <p>Kovur, Nellore, Andhra Pradesh</p>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <i class="fa-solid fa-phone"></i>
+            <div class="info-content">
+                <h4>Phone / WhatsApp</h4>
+                <p>+91 8499938804</p>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <i class="fa-solid fa-envelope"></i>
+            <div class="info-content">
+                <h4>Email</h4>
+                <p>boysfoundation2016@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Column -->
+    <div class="contact-form-card">
+        <h3><i class="fa-solid fa-paper-plane"></i> Send Us a Message</h3>
+        <form method="POST" action="/contact/">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Full Name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="name@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="+91 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" required placeholder="Inquiry / Volunteering / General">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message *</label>
+                <textarea id="message" name="message" rows="4" required placeholder="How can we help you?"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

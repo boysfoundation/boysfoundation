@@ -1,0 +1,125 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Donate - Best_One _Young_Society{% endblock title %}
+
+{% block content %}
+<style>
+    .donate-hero {
+        text-align: center;
+        padding: 45px 20px;
+        background: linear-gradient(135deg, #1e4d2b, #2e6f40);
+        color: white;
+        border-radius: 12px;
+        margin-bottom: 35px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .donate-hero h2 { font-size: 2.3rem; margin-bottom: 10px; }
+
+    .donate-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .donate-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+        border-top: 4px solid #2e6f40;
+    }
+    .donate-card h3 { color: #1e3a8a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #333; }
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .btn-donate-now {
+        background-color: #2e6f40;
+        color: white;
+        border: none;
+        padding: 14px;
+        width: 100%;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .btn-donate-now:hover { background-color: #1e4d2b; }
+
+    .bank-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.98rem;
+    }
+    .bank-row:last-child { border-bottom: none; }
+    .bank-label { color: #666; font-weight: 500; }
+    .bank-value { color: #222; font-weight: bold; }
+
+    .alert-success { background-color: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin-bottom: 25px; border: 1px solid #c3e6cb; }
+    .alert-error { background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px; border: 1px solid #f5c6cb; }
+</style>
+
+<div class="donate-hero">
+    <h2><i class="fa-solid fa-heart-circle-check"></i> Support Our Cause</h2>
+    <p>Your contribution directly impacts lives and empowers young futures.</p>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="{% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+            <i class="fa-solid fa-circle-info"></i> {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="donate-grid">
+    <!-- Online Razorpay Payment Form -->
+    <div class="donate-card">
+        <h3><i class="fa-solid fa-credit-card" style="color: #2e6f40;"></i> Online Donation (Instant)</h3>
+        <form method="POST" action="/donate/">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="name@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Donation Amount (₹) *</label>
+                <input type="number" id="amount" name="amount" min="10" required placeholder="500">
+            </div>
+
+            <button type="submit" class="btn-donate-now">
+                <i class="fa-solid fa-lock"></i> Proceed to Pay
+            </button>
+        </form>
+    </div>
+
+    <!-- Direct Bank Transfer Info -->
+    <div class="donate-card">
+        <h3><i class="fa-solid fa-building-columns" style="color: #2e6f40;"></i> Direct Bank Transfer</h3>
+        <div class="bank-row"><span class="bank-label">Account Name:</span><span class="bank-value">Best_One _Young_Society</span></div>
+        <div class="bank-row"><span class="bank-label">Trust Reg. No:</span><span class="bank-value">268/2016</span></div>
+        <div class="bank-row"><span class="bank-label">Bank Name:</span><span class="bank-value">HDFC</span></div>
+        <div class="bank-row"><span class="bank-label">Account Number:</span><span class="bank-value">[Your Account Number]</span></div>
+        <div class="bank-row"><span class="bank-label">IFSC Code:</span><span class="bank-value">[Your IFSC Code]</span></div>
+        <div class="bank-row"><span class="bank-label">UPI ID:</span><span class="bank-value">[Your UPI ID]</span></div>
+    </div>
+</div>
+{% endblock content %}

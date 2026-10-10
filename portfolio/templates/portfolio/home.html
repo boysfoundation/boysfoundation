@@ -1,0 +1,273 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Home - Best_One_Young_Society{% endblock title %}
+
+{% block content %}
+<style>
+    /* Hero Banner Container */
+    .hero-container {
+        position: relative;
+        background-color: #ffffff;
+        color: #1a365d;
+        padding: 80px 30px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 45px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Blended Logo Watermark Overlay */
+    .hero-logo-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 380px;
+        height: 380px;
+        object-fit: contain;
+        opacity: 0.2; /* Low opacity watermark effect */
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-container h1 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1e3a8a; /* Deep Navy Blue matching logo text */
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-container p {
+        font-size: 1.15rem;
+        color: #475569;
+        max-width: 750px;
+        margin: 0 auto 30px auto;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary-custom {
+        background-color: #2e6f40; /* Logo Green */
+        color: #ffffff;
+        padding: 14px 30px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        box-shadow: 0 4px 12px rgba(46, 111, 64, 0.25);
+    }
+
+    .btn-secondary-custom {
+        border: 2px solid #1e3a8a;
+        color: #1e3a8a;
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: #1e4d2b;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary-custom:hover {
+        background-color: #1e3a8a;
+        color: #ffffff;
+    }
+
+    /* Section Titles */
+    .section-title {
+        text-align: center;
+        color: #1e3a8a;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    .highlight-card {
+        background: white;
+        padding: 30px 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #2e6f40;
+        transition: transform 0.3s ease;
+    }
+
+    .highlight-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .highlight-icon {
+        width: 60px;
+        height: 60px;
+        background: #f0fdf4;
+        color: #2e6f40;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        margin: 0 auto 15px auto;
+    }
+
+    .highlight-card h3 {
+        color: #1e3a8a;
+        margin-bottom: 10px;
+        font-size: 1.25rem;
+    }
+
+    .highlight-card p {
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Projects Grid */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .project-card h3 {
+        color: #1e3a8a;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .project-card p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .project-card small {
+        color: #94a3b8;
+        display: block;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+    /* Callout Box */
+    .callout-box {
+        background: #ffffff;
+        border: 2px dashed #2e6f40;
+        padding: 35px;
+        border-radius: 14px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .callout-box h2 {
+        color: #1e3a8a;
+        margin-bottom: 10px;
+    }
+
+    .callout-box p {
+        color: #475569;
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+    }
+</style>
+
+<!-- Hero Banner with White Backdrop & Low Opacity Logo Overlay -->
+<div class="hero-container">
+    <!-- Centered Logo Watermark Image -->
+    <img src="{% static 'logo.png' %}" alt="Trust Logo Watermark" class="hero-logo-watermark">
+
+    <div class="hero-content">
+        <h1>Making a Difference with Best_One_Young_Society</h1>
+        <p>Explore our recent initiatives and the impact we are creating together. Your support helps us serve those in need and build a stronger future for the youth.</p>
+        <div class="hero-buttons">
+            <a href="/donate/" class="btn-primary-custom"><i class="fa-solid fa-heart"></i> Support Our Mission - Donate Now</a>
+            <a href="/portfolio/" class="btn-secondary-custom"><i class="fa-solid fa-briefcase"></i> View Our Portfolio</a>
+        </div>
+    </div>
+</div>
+
+<!-- Impact Highlights Section -->
+<h2 class="section-title">What We Do</h2>
+<div class="highlights-grid">
+    <div class="highlight-card">
+        <div class="highlight-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3>Youth Empowerment</h3>
+        <p>Providing skill guidance, mentorship, and educational materials to help young individuals build brighter futures.</p>
+    </div>
+    <div class="highlight-card">
+        <div class="highlight-icon"><i class="fa-solid fa-bowl-food"></i></div>
+        <h3>Food Drives</h3>
+        <p>Organizing direct food donation programs for underprivileged families and shelter residents in need.</p>
+    </div>
+    <div class="highlight-card">
+        <div class="highlight-icon"><i class="fa-solid fa-people-roof"></i></div>
+        <h3>Community Care</h3>
+        <p>Extending social welfare assistance and medical awareness drives across local underserved communities.</p>
+    </div>
+</div>
+
+<!-- Dynamic Projects Showcase -->
+<h2 class="section-title">Our Projects & Portfolio</h2>
+<div class="project-grid">
+    {% for project in projects %}
+        <div class="project-card">
+            {% if project.image %}
+                <div style="width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 15px; overflow: hidden;">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
+            {% endif %}
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description|truncatewords:25 }}</p>
+            <small><i class="fa-solid fa-calendar-days"></i> Posted: {{ project.date_posted|date:"F d, Y" }}</small>
+        </div>
+    {% empty %}
+        <p style="grid-column: 1/-1; text-align: center; color: #666;">No projects added yet. Use the <a href="/admin/">Admin Dashboard</a> to add your first project!</p>
+    {% endfor %}
+</div>
+
+<!-- Callout Banner -->
+<div class="callout-box">
+    <h2>Make a Difference Today</h2>
+    <p>Your support allows us to reach more families and empower more young lives across society.</p>
+    <a href="/donate/" class="btn-primary-custom"><i class="fa-solid fa-hand-holding-dollar"></i> Donate Now</a>
+</div>
+{% endblock content %}

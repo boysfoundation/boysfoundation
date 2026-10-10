@@ -1,0 +1,45 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Checkout - Best_One_Young_Society{% endblock title %}
+
+{% block content %}
+<div style="text-align: center; padding: 60px 20px;">
+    <h2>Processing Donation...</h2>
+    <p>Please complete your payment of <strong>₹{{ amount }}</strong> via the Razorpay window.</p>
+    <button id="pay-btn" class="btn-primary-custom" style="background-color: #2e6f40; color: white; padding: 12px 30px; border: none; border-radius: 25px; cursor: pointer; font-size: 1rem; margin-top: 15px;">
+        <i class="fa-solid fa-lock"></i> Click Here to Pay Now
+    </button>
+</div>
+
+<!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_merchant_key }}",
+        "amount": "{{ razorpay_amount }}",
+        "currency": "{{ currency }}",
+        "name": "Best_One _Young_Society",
+        "description": "Donation to Trust (Reg. No: 268/2016)",
+        "order_id": "{{ razorpay_order_id }}",
+        "callback_url": "{{ callback_url }}",
+        "prefill": {
+            "name": "{{ donor_name }}",
+            "email": "{{ donor_email }}"
+        },
+        "theme": {
+            "color": "#2e6f40"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    
+    // Auto open checkout window
+    window.onload = function() {
+        rzp1.open();
+    };
+
+    document.getElementById('pay-btn').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+{% endblock content %}
