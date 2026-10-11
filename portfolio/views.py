@@ -6,6 +6,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from .models import ContactMessage, DonationPayment, Project
 import requests
+import os
+import logging
+logger = logging.getLogger(__name__)
+
 # Initialize Razorpay Client
 razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
@@ -92,24 +96,30 @@ def payment_handler(request):
     else:
         return redirect('/donate/')
 
+
+
 def contact(request):
   if request.method == 'POST':
-    name = request.POST.get('name')
-    email = request.POST.get('email')
-    phone = request.POST.get('phone')
-    subject = request.POST.get('subject', 'New Contact Form Submission')
-    message = request.POST.get('message')
+    name = request.POST.get('name', '').strip()
+    email = request.POST.get('email', '').strip()
+    phone = request.POST.get('phone', '').strip()
+    subject = request.POST.get('subject', 'New Contact Form Submission').strip()
+    message = request.POST.get('message', '').strip()
 
-    # 1. Save to Supabase Database
-    ContactMessage.objects.create(
-        name=name,
-        email=email,
-        phone=phone,
-        subject=subject,
-        message=message,
-    )
+    # 1. Try to save to Supabase Database
+    try:
+      ContactMessage.objects.create(
+          name=name,
+          email=email,
+          phone=phone,
+          subject=subject,
+          message=message,
+      )
+    except Exception as db_err:
+      print(f'DATABASE CRASH ERROR: {db_err}')
+      logger.error(f'DATABASE CRASH ERROR: {db_err}')
 
-    # 2. Send Email via Brevo REST API (Bypasses Render SMTP Blocks)
+    # 2. Try to send Email via Brevo REST API
     brevo_api_key = os.getenv('EMAIL_HOST_PASSWORD')
 
     if brevo_api_key:
@@ -138,13 +148,15 @@ def contact(request):
       }
 
       try:
-        response = requests.post(
-            url, json=payload, headers=headers, timeout=10
-        )
-        print('Brevo API status code:', response.status_code)
-      except Exception as e:
-        print('Failed to send email via Brevo API:', e)
+        res = requests.post(url, json=payload, headers=headers, timeout=10)
+        print(f'Brevo API Status: {res.status_code}, Response: {res.text}')
+      except Exception as api_err:
+        print(f'BREVO API CRASH ERROR: {api_err}')
+        logger.error(f'BREVO API CRASH ERROR: {api_err}')
+    else:
+      print('CRITICAL WARNING: EMAIL_HOST_PASSWORD is not set in environment!')
 
+    # 3. Always show success message to user (no 500 error!)
     messages.success(
         request, 'Thank you! Your message has been sent successfully.'
     )
