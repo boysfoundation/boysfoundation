@@ -193,20 +193,35 @@ def contact(request):
       }
       payload = {
           'sender': {
-              'name': 'Boys Foundation',
-              'email': 'boysfoundation2016@gmail.com',
-          },
-          'to': [{'email': 'boysfoundation2016@gmail.com', 'name': 'Admin'}],
-          'subject': f'Contact Form: {subject}',
-          'htmlContent': f"""
-                    <h3>New Contact Form Submission</h3>
-                    <p><strong>Name:</strong> {name}</p>
-                    <p><strong>Email:</strong> {email}</p>
-                    <p><strong>Phone:</strong> {phone}</p>
-                    <p><strong>Subject:</strong> {subject}</p>
-                    <br>
-                    <p><strong>Message:</strong><br>{message}</p>
-                """,
+                'name': 'Boys Foundation',
+                'email': 'boysfoundation2016@gmail.com',
+            },
+            'to': [
+                {'email': donation.email, 'name': donation.name},
+                {
+                    'email': 'boysfoundation2016@gmail.com',
+                    'name': 'Boys Foundation Admin',
+                },
+            ],
+            (
+                'subject'
+            ): f'New Donation Received: ₹{donation.amount} from {donation.name}',
+            'htmlContent': f"""
+                        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            <h2 style="color: #1a365d;">New Donation Notification 🎉</h2>
+                            <p>A successful donation has been made to the Boys Foundation.</p>
+                            <hr style="border: none; border-top: 1px solid #edf2f7; margin: 20px 0;">
+                            <p style="font-size: 0.95em; color: #2d3748;">
+                                <strong>Donor Name:</strong> {donation.name}<br>
+                                <strong>Donor Email:</strong> {donation.email}<br>
+                                <strong>Amount:</strong> ₹{donation.amount}<br>
+                                <strong>Payment ID:</strong> {payment_id}<br>
+                                <strong>Order ID:</strong> {razorpay_order_id}<br>
+                                <strong>Date:</strong> {donation.created_at.strftime('%B %d, %Y')}
+                            </p>
+                            <p style="margin-top: 30px; color: #4a5568; font-size: 0.9em;">This is an automated notification from your website's donation system.</p>
+                        </div>
+                    """,
       }
 
       try:
