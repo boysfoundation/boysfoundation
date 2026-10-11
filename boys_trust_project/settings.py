@@ -37,14 +37,11 @@ ALLOWED_HOSTS = [
 ]
 
 
-# STATIC FILES CONFIGURATION (Must be defined BEFORE INSTALLED_APPS)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(base_dir_or_your_base_path, 'staticfiles')  # Usually base_dir / 'staticfiles'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
+# WhiteNoise settings to prevent missing manifest crashes
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -151,12 +148,12 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
 
 # Legacy fallback for packages that still look for this attribute
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 
 WHITENOISE_MANIFEST_STRICT = False
 
