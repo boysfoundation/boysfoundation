@@ -164,6 +164,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Credentials loaded from environment variables
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'boysfoundation2016@gmail.com')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = f'Boys Foundation <{EMAIL_HOST_USER}>'
+
+# Always use your verified Gmail address as the sender
+DEFAULT_FROM_EMAIL = 'Boys Foundation <boysfoundation2016@gmail.com>'
