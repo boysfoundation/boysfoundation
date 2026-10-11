@@ -181,28 +181,54 @@ def contact(request):
       logger.error(f'DATABASE CRASH ERROR: {db_err}')
 
     # 2. Try to send Email via Brevo REST API
-    brevo_api_key = os.getenv('BREVO_API_KEY') or os.getenv(
-        'EMAIL_HOST_PASSWORD'
-    )
-    if brevo_api_key:
-      url = 'https://api.brevo.com/v3/smtp/email'
-      headers = {
-          'accept': 'application/json',
-          'api-key': brevo_api_key,
-          'content-type': 'application/json',
-      }
-      payload = {
-          'sender': {
+    # --- SEND EMAILS VIA BREVO REST API ---
+      brevo_api_key = os.getenv('BREVO_API_KEY') or os.getenv(
+          'EMAIL_HOST_PASSWORD'
+      )
+      if brevo_api_key:
+        url = 'https://api.brevo.com/v3/smtp/email'
+        headers = {
+            'accept': 'application/json',
+            'api-key': brevo_api_key,
+            'content-type': 'application/json',
+        }
+
+        # 1. Send Thank-You Email to the Donor
+        donor_payload = {
+            'sender': {
                 'name': 'Boys Foundation',
                 'email': 'boysfoundation2016@gmail.com',
             },
-            'to': [
-                {'email': donation.email, 'name': donation.name},
-                {
-                    'email': 'boysfoundation2016@gmail.com',
-                    'name': 'Boys Foundation Admin',
-                },
-            ],
+            'to': [{'email': donation.email, 'name': donation.name}],
+            (
+                'subject'
+            ): 'Thank You for Your Generous Donation! ❤️ - Boys Foundation',
+            'htmlContent': f"""
+                        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            <h2 style="color: #1a365d;">Thank You, {donation.name}! 🙏</h2>
+                            <p>We are deeply grateful for your generous donation of <strong>₹{donation.amount}</strong> to the Boys Foundation.</p>
+                            <p>Your support helps us continue our mission and make a meaningful impact in our community.</p>
+                            <hr style="border: none; border-top: 1px solid #edf2f7; margin: 20px 0;">
+                            <p style="font-size: 0.9em; color: #4a5568;">
+                                <strong>Payment ID:</strong> {payment_id}<br>
+                                <strong>Order ID:</strong> {razorpay_order_id}<br>
+                                <strong>Date:</strong> {donation.created_at.strftime('%B %d, %Y')}
+                            </p>
+                            <p style="margin-top: 30px; color: #2d3748;">With heartfelt gratitude,<br><strong>Boys Foundation Team</strong></p>
+                        </div>
+                    """,
+        }
+
+        # 2. Send Notification Email to the Admin (boysfoundation2016@gmail.com)
+        admin_payload = {
+            'sender': {
+                'name': 'Boys Foundation',
+                'email': 'boysfoundation2016@gmail.com',
+            },
+            'to': [{
+                'email': 'boysfoundation2016@gmail.com',
+                'name': 'Boys Foundation Admin',
+            }],
             (
                 'subject'
             ): f'New Donation Received: ₹{donation.amount} from {donation.name}',
@@ -222,16 +248,25 @@ def contact(request):
                             <p style="margin-top: 30px; color: #4a5568; font-size: 0.9em;">This is an automated notification from your website's donation system.</p>
                         </div>
                     """,
-      }
+        }
 
-      try:
-        res = requests.post(url, json=payload, headers=headers, timeout=10)
-        print(f'Brevo API Status: {res.status_code}, Response: {res.text}')
-      except Exception as api_err:
-        print(f'BREVO API CRASH ERROR: {api_err}')
-        logger.error(f'BREVO API CRASH ERROR: {api_err}')
-    else:
-      print('CRITICAL WARNING: EMAIL_HOST_PASSWORD is not set in environment!')
+        try:
+          # Fire both requests independently
+          res_donor = requests.post(
+              url, json=donor_payload, headers=headers, timeout=10
+          )
+          res_admin = requests.post(
+              url, json=admin_payload, headers=headers, timeout=10
+          )
+          print(
+              f'Donor Email Status: {res_donor.status_code}, Admin Email'
+              f' Status: {res_admin.status_code}'
+          )
+        except Exception as api_err:
+          print(f'BREVO DONATION EMAIL CRASH ERROR: {api_err}')
+          logger.error(f'BREVO DONATION EMAIL CRASH ERROR: {api_err}')
+      else:
+        print('CRITICAL WARNING: BREVO_API_KEY/EMAIL_HOST_PASSWORD not set!')
 
     # 3. Always show success message to user (no 500 error!)
     messages.success(
