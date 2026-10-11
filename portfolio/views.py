@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from .models import ContactMessage, DonationPayment, Project
+import requests
 # Initialize Razorpay Client
 razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
@@ -99,7 +100,7 @@ def contact(request):
     subject = request.POST.get('subject', 'New Contact Form Submission')
     message = request.POST.get('message')
 
-    # 1. Save message to database
+    # 1. Save to Supabase Database
     ContactMessage.objects.create(
         name=name,
         email=email,
@@ -108,29 +109,44 @@ def contact(request):
         message=message,
     )
 
-    # 2. Send email notification via Brevo
-    full_message = f"""
-New Contact Form Submission:
+    # 2. Send Email via Brevo REST API (Bypasses Render SMTP Blocks)
+    brevo_api_key = os.getenv('EMAIL_HOST_PASSWORD')
 
-Name: {name}
-Email: {email}
-Phone: {phone}
-Subject: {subject}
+    if brevo_api_key:
+      url = 'https://api.brevo.com/v3/smtp/email'
+      headers = {
+          'accept': 'application/json',
+          'api-key': brevo_api_key,
+          'content-type': 'application/json',
+      }
+      payload = {
+          'sender': {
+              'name': 'Boys Foundation',
+              'email': 'boysfoundation2016@gmail.com',
+          },
+          'to': [{'email': 'boysfoundation2016@gmail.com', 'name': 'Admin'}],
+          'subject': f'Contact Form: {subject}',
+          'htmlContent': f"""
+                    <h3>New Contact Form Submission</h3>
+                    <p><strong>Name:</strong> {name}</p>
+                    <p><strong>Email:</strong> {email}</p>
+                    <p><strong>Phone:</strong> {phone}</p>
+                    <p><strong>Subject:</strong> {subject}</p>
+                    <br>
+                    <p><strong>Message:</strong><br>{message}</p>
+                """,
+      }
 
-Message:
-{message}
-"""
-
-    send_mail(
-        subject=f"Contact Form: {subject}",
-        message=full_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=['boysfoundation2016@gmail.com'],
-        fail_silently=False,
-    )
+      try:
+        response = requests.post(
+            url, json=payload, headers=headers, timeout=10
+        )
+        print('Brevo API status code:', response.status_code)
+      except Exception as e:
+        print('Failed to send email via Brevo API:', e)
 
     messages.success(
-        request, "Thank you! Your message has been sent successfully."
+        request, 'Thank you! Your message has been sent successfully.'
     )
 
   return render(request, 'portfolio/contact.html')
