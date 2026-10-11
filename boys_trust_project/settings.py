@@ -157,9 +157,9 @@ RAZOR_KEY_ID = os.getenv('RAZOR_KEY_ID', 'rzp_live_Tm7qWG9EH3nOW0')
 RAZOR_KEY_SECRET = os.getenv('RAZOR_KEY_SECRET', 'SCKxbXHxRDRPQqMFEYQXSk9D')
 
 
-# SMTP Email Configuration
+# Brevo Free SMTP Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
