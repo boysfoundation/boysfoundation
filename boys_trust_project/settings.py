@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
+
 from pathlib import Path
 import os
 import dj_database_url
@@ -17,11 +18,20 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure--=m@3j-@h2@j2=(=0x^51d31tqcn#t#n2gumypj8r(%_j7xk12'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure--=m@3j-@h2@j2=(=0x^51d31tqcn#t#n2gumypj8r(%_j7xk12',
+)
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['boysfoundation.in', 'www.boysfoundation.in', '.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'boysfoundation.in',
+    'www.boysfoundation.in',
+    '.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # STATIC FILES CONFIGURATION (Must be defined BEFORE INSTALLED_APPS)
@@ -83,31 +93,41 @@ WSGI_APPLICATION = 'boys_trust_project.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
-    }
+  DATABASES = {
+      'default': dj_database_url.parse(
+          DATABASE_URL, conn_max_age=600, ssl_require=True
+      )
+  }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',
+          'NAME': BASE_DIR / 'db.sqlite3',
+      }
+  }
 
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -121,23 +141,29 @@ USE_TZ = True
 
 # WhiteNoise storage configuration
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
     },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
     },
 }
 
 WHITENOISE_MANIFEST_STRICT = False
 
-# Email configuration
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
 
 # Razorpay Credentials
-RAZOR_KEY_ID = 'rzp_live_Tm7qWG9EH3nOW0'
-RAZOR_KEY_SECRET = 'SCKxbXHxRDRPQqMFEYQXSk9D'
+RAZOR_KEY_ID = os.getenv('RAZOR_KEY_ID', 'rzp_live_Tm7qWG9EH3nOW0')
+RAZOR_KEY_SECRET = os.getenv('RAZOR_KEY_SECRET', 'SCKxbXHxRDRPQqMFEYQXSk9D')
+
+
+# SMTP Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Credentials loaded from environment variables
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'boysfoundation2016@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = f'Boys Foundation <{EMAIL_HOST_USER}>'
