@@ -38,10 +38,8 @@ ALLOWED_HOSTS = [
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(base_dir_or_your_base_path, 'staticfiles')  # Usually base_dir / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Usually base_dir / 'staticfiles'
 
-# WhiteNoise settings to prevent missing manifest crashes
-STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
