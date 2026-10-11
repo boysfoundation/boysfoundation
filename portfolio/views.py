@@ -120,8 +120,7 @@ def contact(request):
       logger.error(f'DATABASE CRASH ERROR: {db_err}')
 
     # 2. Try to send Email via Brevo REST API
-    brevo_api_key = os.getenv('EMAIL_HOST_PASSWORD')
-
+    brevo_api_key = os.getenv('BREVO_API_KEY') or os.getenv('EMAIL_HOST_PASSWORD')
     if brevo_api_key:
       url = 'https://api.brevo.com/v3/smtp/email'
       headers = {
