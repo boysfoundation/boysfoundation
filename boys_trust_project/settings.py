@@ -39,6 +39,9 @@ ALLOWED_HOSTS = [
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Usually base_dir / 'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Media files
 MEDIA_URL = '/media/'
@@ -140,19 +143,18 @@ USE_TZ = True
 
 
 # WhiteNoise storage configuration
-# Modern Django Storage Settings
+# Use standard WhiteNoise storage (bypasses manifest strictness errors)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
     },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
     },
 }
 
-# Legacy fallback for packages that still look for this attribute
-STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
-
+# Prevent WhiteNoise build crashes
 WHITENOISE_MANIFEST_STRICT = False
 
 # Make sure your Cloudinary configuration dictionary is also present:
