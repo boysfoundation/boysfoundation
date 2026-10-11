@@ -92,20 +92,45 @@ def payment_handler(request):
         return redirect('/donate/')
 
 def contact(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
+  if request.method == 'POST':
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    phone = request.POST.get('phone')
+    subject = request.POST.get('subject', 'New Contact Form Submission')
+    message = request.POST.get('message')
 
-        ContactMessage.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            subject=subject,
-            message=message
-        )
-        messages.success(request, "Thank you! Your message has been sent successfully.")
+    # 1. Save message to database
+    ContactMessage.objects.create(
+        name=name,
+        email=email,
+        phone=phone,
+        subject=subject,
+        message=message,
+    )
 
-    return render(request, 'portfolio/contact.html')
+    # 2. Send email notification via Brevo
+    full_message = f"""
+New Contact Form Submission:
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Subject: {subject}
+
+Message:
+{message}
+"""
+
+    send_mail(
+        subject=f"Contact Form: {subject}",
+        message=full_message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=['boysfoundation2016@gmail.com'],
+        fail_silently=False,
+    )
+
+    messages.success(
+        request, "Thank you! Your message has been sent successfully."
+    )
+
+  return render(request, 'portfolio/contact.html')
