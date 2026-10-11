@@ -144,13 +144,13 @@ USE_TZ = True
 
 # WhiteNoise storage configuration
 # Use standard WhiteNoise storage (bypasses manifest strictness errors)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 STORAGES = {
     'default': {
         'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
     },
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
+        'BACKEND': 'whitenoise.storage.StaticFilesStorage',
     },
 }
 
