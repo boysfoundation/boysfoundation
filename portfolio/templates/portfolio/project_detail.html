@@ -26,7 +26,7 @@
         /* Decreased Main Detail Image Size */
         .main-detail-image {
             width: 100%;
-            max-height: 280px; /* Reduced height */
+            max-height: 280px;
             background: #f8f9fa;
             border-radius: 10px;
             display: flex;
@@ -50,17 +50,19 @@
             margin-bottom: 35px;
         }
 
-        /* Gallery Section with Increased Image Sizes */
+        /* Side-by-Side Equal Division Gallery (Single Row) */
         .gallery-heading { color: #0056b3; font-size: 1.5rem; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 8px; display: inline-block; }
         .project-gallery {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: row;
+            flex-wrap: nowrap; /* Forces all images strictly side-by-side in one row */
             gap: 15px;
+            width: 100%;
         }
         .gallery-item {
-            flex: 1 1 calc(50% - 15px); /* Side-by-side split for 2 images */
-            min-width: 240px;
-            height: 280px; /* Increased height for larger gallery images */
+            flex: 1 1 0; /* Automatically divides available width equally (50/50, 33/33/33, etc.) */
+            min-width: 0; /* Prevents flexbox overflow */
+            height: 220px;
             border-radius: 8px;
             overflow: hidden;
             background-color: #f8f9fa;
