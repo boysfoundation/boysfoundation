@@ -226,7 +226,7 @@ def contact(request):
   return render(request, 'portfolio/contact.html')
 
 def project_list(request):
-    projects = Project.objects.all().order_by('-date_posted')
+    projects = Project.objects.all().order_by('order', '-date_posted')
     return render(request, 'portfolio/portfolio.html', {'projects': projects})
 
 def project_detail(request, pk):
