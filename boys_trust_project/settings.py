@@ -129,19 +129,20 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Unified Unified Storage Configuration (Django 4.2+)
+# Unified Storage Configuration (Django 4.2+)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
 
-# Compatibility alias for legacy package lookups
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# Legacy fallback setting for packages checking STATICFILES_STORAGE directly
+STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 
+# Disable strict manifest behavior
 WHITENOISE_MANIFEST_STRICT = False
 
 # Cloudinary Credentials Configuration
