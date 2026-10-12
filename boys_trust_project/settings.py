@@ -139,6 +139,9 @@ STORAGES = {
     },
 }
 
+# Compatibility alias for legacy package lookups
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
 WHITENOISE_MANIFEST_STRICT = False
 
 # Cloudinary Credentials Configuration
