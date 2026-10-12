@@ -1,0 +1,97 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}{{ project.title }} - Best_One_Young_Society{% endblock title %}
+
+{% block content %}
+    <style>
+        .detail-container {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .detail-title { color: #0056b3; font-size: 2.2rem; margin-bottom: 10px; }
+        .detail-date { color: #888; display: block; margin-bottom: 25px; }
+
+        .main-detail-image {
+            width: 100%;
+            max-height: 400px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
+        }
+        .main-detail-image img { max-width: 100%; max-height: 370px; object-fit: contain; border-radius: 8px; }
+
+        .detail-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 35px;
+        }
+
+        /* Gallery Section on Detail Page */
+        .gallery-heading { color: #0056b3; font-size: 1.5rem; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 8px; display: inline-block; }
+        .project-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 15px);
+            min-width: 180px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+        .gallery-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+    </style>
+
+    <div class="detail-container">
+        <a href="{% url 'portfolio' %}" class="back-link">&larr; Back to Portfolio Page</a>
+
+        <h1 class="detail-title">{{ project.title }}</h1>
+        <small class="detail-date">Posted on: {{ project.date_posted|date:"F d, Y" }}</small>
+
+        {% if project.image %}
+            <div class="main-detail-image">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            </div>
+        {% endif %}
+
+        <div class="detail-description">
+            <p>{{ project.description }}</p>
+        </div>
+
+        {% if project.images.all %}
+            <h3 class="gallery-heading">Project Gallery</h3>
+            <div class="project-gallery">
+                {% for img_obj in project.images.all %}
+                    <div class="gallery-item">
+                        <img src="{{ img_obj.image.url }}" alt="Gallery image for {{ project.title }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

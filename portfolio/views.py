@@ -224,3 +224,11 @@ def contact(request):
     )
 
   return render(request, 'portfolio/contact.html')
+
+def project_list(request):
+    projects = Project.objects.all().order_by('-date_posted')
+    return render(request, 'portfolio/portfolio.html', {'projects': projects})
+
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    return render(request, 'portfolio/project_detail.html', {'project': project})

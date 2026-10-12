@@ -4,37 +4,19 @@
 
 {% block content %}
     <style>
-        .portfolio-header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            background: white; 
-            padding: 40px 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
-        }
+        .portfolio-header { text-align: center; margin-bottom: 40px; background: white; padding: 40px 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .portfolio-header h2 { color: #0056b3; font-size: 2.2rem; margin-bottom: 10px; }
         .portfolio-header p { font-size: 1.1rem; color: #555; max-width: 700px; margin: 0 auto; }
         
-        /* Grid setup: align-items: start keeps cards natural height without stretching */
-        .project-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 30px; 
-            align-items: start; 
-        }
-        .project-card { 
-            background: white; 
-            border-radius: 10px; 
-            padding: 25px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            transition: transform 0.3s;
-        }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: start; }
+        .project-card { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; }
         .project-card:hover { transform: translateY(-5px); }
-        .project-card h3 { color: #007bff; margin-top: 15px; margin-bottom: 10px; }
+        .project-card h3 { margin-top: 15px; margin-bottom: 10px; }
+        .project-card h3 a { color: #007bff; text-decoration: none; }
+        .project-card h3 a:hover { text-decoration: underline; }
         .project-card p { color: #444; line-height: 1.6; margin-bottom: 15px; }
         .project-card small { color: #888; display: block; margin-top: 15px; }
 
-        /* Main Featured Image Box */
         .main-image-container {
             width: 100%;
             height: 220px;
@@ -47,43 +29,7 @@
             padding: 8px;
             border: 1px solid #e9ecef;
         }
-        .main-image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-
-        /* Side-by-Side Dynamic Division Gallery (Single Row) */
-        .project-gallery {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap; /* Keeps all images strictly side-by-side in one row */
-            gap: 10px;
-            width: 100%;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        .gallery-item {
-            flex: 1 1 0; /* Automatically divides available width equally (50/50, 33/33/33, etc.) */
-            min-width: 0; /* Prevents overflow in flexbox */
-            height: 140px;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #f8f9fa;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-        .gallery-item img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Full image visible without cropping */
-            border-radius: 4px;
-        }
+        .main-image-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
     </style>
 
     <div class="portfolio-header">
@@ -94,31 +40,21 @@
     <div class="project-grid">
         {% for project in projects %}
             <div class="project-card">
-                <!-- Main Featured Image -->
                 {% if project.image %}
-                    <div class="main-image-container">
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
-                    </div>
+                    <a href="{% url 'project_detail' project.pk %}">
+                        <div class="main-image-container">
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        </div>
+                    </a>
                 {% endif %}
 
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.description }}</p>
-
-                <!-- Side-by-Side Dynamic Equal Division Gallery -->
-                {% if project.images.all %}
-                    <div class="project-gallery">
-                        {% for img_obj in project.images.all %}
-                            <div class="gallery-item">
-                                <img src="{{ img_obj.image.url }}" alt="Gallery image for {{ project.title }}">
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                <h3><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></h3>
+                <p>{{ project.description|truncatewords:25 }}</p>
 
                 <small>Posted on: {{ project.date_posted|date:"F d, Y" }}</small>
             </div>
         {% empty %}
-            <p style="grid-column: 1/-1; text-align: center; color: #666;">No projects added yet. Use the <a href="/admin/">Admin Dashboard</a> to add your first project!</p>
+            <p style="grid-column: 1/-1; text-align: center; color: #666;">No projects added yet.</p>
         {% endfor %}
     </div>
 {% endblock content %}

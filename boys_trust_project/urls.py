@@ -20,3 +20,8 @@ urlpatterns = [
         r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}
     ),
 ]
+
+urlpatterns = [
+    path('', views.project_list, name='portfolio'),
+    path('project/<int:pk>/', views.project_detail, name='project_detail'),
+]
