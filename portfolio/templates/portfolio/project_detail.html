@@ -23,19 +23,25 @@
         .detail-title { color: #0056b3; font-size: 2.2rem; margin-bottom: 10px; }
         .detail-date { color: #888; display: block; margin-bottom: 25px; }
 
+        /* Decreased Main Detail Image Size */
         .main-detail-image {
             width: 100%;
-            max-height: 400px;
+            max-height: 280px; /* Reduced height */
             background: #f8f9fa;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 12px;
             margin-bottom: 25px;
             border: 1px solid #e9ecef;
         }
-        .main-detail-image img { max-width: 100%; max-height: 370px; object-fit: contain; border-radius: 8px; }
+        .main-detail-image img { 
+            max-width: 100%; 
+            max-height: 255px; 
+            object-fit: contain; 
+            border-radius: 8px; 
+        }
 
         .detail-description {
             font-size: 1.1rem;
@@ -44,7 +50,7 @@
             margin-bottom: 35px;
         }
 
-        /* Gallery Section on Detail Page */
+        /* Gallery Section with Increased Image Sizes */
         .gallery-heading { color: #0056b3; font-size: 1.5rem; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 8px; display: inline-block; }
         .project-gallery {
             display: flex;
@@ -52,9 +58,9 @@
             gap: 15px;
         }
         .gallery-item {
-            flex: 1 1 calc(33.333% - 15px);
-            min-width: 180px;
-            height: 180px;
+            flex: 1 1 calc(50% - 15px); /* Side-by-side split for 2 images */
+            min-width: 240px;
+            height: 280px; /* Increased height for larger gallery images */
             border-radius: 8px;
             overflow: hidden;
             background-color: #f8f9fa;
@@ -62,9 +68,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5px;
+            padding: 8px;
         }
-        .gallery-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+        .gallery-item img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain; 
+            border-radius: 6px; 
+        }
     </style>
 
     <div class="detail-container">
