@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'portfolio',
 ]
 
@@ -129,20 +130,21 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Unified Storage Configuration (Django 4.2+)
+# Primary Storage Engine (Django 4.2+)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
-# Legacy fallback setting for packages checking STATICFILES_STORAGE directly
-STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
+# Compatibility Fallback
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-# Disable strict manifest behavior
+# Enable WhiteNoise to look directly inside STATICFILES_DIRS if collectstatic misses anything
+WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 
 # Cloudinary Credentials Configuration
