@@ -9,9 +9,11 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('portfolio/', views.portfolio, name='portfolio'),
+    path('portfolio/project/<int:pk>/', views.project_detail, name='project_detail'),
     path('donate/', views.donate, name='donate'),
     path('payment-handler/', views.payment_handler, name='payment_handler'),
     path('contact/', views.contact, name='contact'),
+
     # Explicitly serve static and media files on production (Render)
     re_path(
         r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}
@@ -19,9 +21,4 @@ urlpatterns = [
     re_path(
         r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}
     ),
-]
-
-urlpatterns = [
-    path('', views.project_list, name='portfolio'),
-    path('project/<int:pk>/', views.project_detail, name='project_detail'),
 ]
