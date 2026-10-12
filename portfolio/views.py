@@ -18,7 +18,7 @@ razorpay_client = razorpay.Client(
 
 
 def home(request):
-  projects = Project.objects.all().order_by('-date_posted')
+  projects = Project.objects.all().order_by('order', '-date_posted')
   return render(request, 'portfolio/home.html', {'projects': projects})
 
 
