@@ -3,11 +3,22 @@ from django.db import models
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    image = models.ImageField(upload_to='projects/', blank=True, null=True)  # Main/featured cover image
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+
+class ProjectImage(models.Model):
+    """Allows uploading multiple additional images for a single project"""
+    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='projects/gallery/')
+    caption = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return f"Image for {self.project.title}"
+
 
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)
@@ -20,19 +31,20 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"Message from {self.name} - {self.subject}"
 
-class DonationPayment(models.Model):
-  name = models.CharField(max_length=100)
-  email = models.EmailField()
-  amount = models.IntegerField()  # Amount in INR
-  razorpay_order_id = models.CharField(max_length=100, unique=True)
-  razorpay_payment_id = models.CharField(
-      max_length=100, blank=True, null=True
-  )
-  razorpay_signature = models.CharField(max_length=255, blank=True, null=True)
-  status = models.CharField(
-      max_length=20, default='Pending'
-  )  # Pending, Success, Failed
-  created_at = models.DateTimeField(auto_now_add=True)
 
-  def __str__(self):
-    return f'{self.name} - ₹{self.amount} ({self.status})'
+class DonationPayment(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    amount = models.IntegerField()  # Amount in INR
+    razorpay_order_id = models.CharField(max_length=100, unique=True)
+    razorpay_payment_id = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    razorpay_signature = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(
+        max_length=20, default='Pending'
+    )  # Pending, Success, Failed
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.name} - ₹{self.amount} ({self.status})'
