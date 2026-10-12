@@ -7,8 +7,9 @@ class ProjectImageInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order', 'date_posted')
+    list_editable = ('order',)  # Allows changing position numbers directly from the list view!
     inlines = [ProjectImageInline]
-    list_display = ('title', 'date_posted')
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):

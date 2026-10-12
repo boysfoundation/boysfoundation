@@ -5,6 +5,10 @@ class Project(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='projects/', blank=True, null=True)  # Main/featured cover image
     date_posted = models.DateTimeField(auto_now_add=True)
+    order = models.PositiveIntegerField(default=0, help_text="Set custom order (1 = first, 2 = second, etc.)")
+
+    class Meta:
+        ordering = ['order', '-date_posted']
 
     def __str__(self):
         return self.title

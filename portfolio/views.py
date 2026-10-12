@@ -23,7 +23,7 @@ def home(request):
 
 
 def portfolio(request):
-  projects = Project.objects.all().order_by('-date_posted')
+  projects = Project.objects.all().order_by('order', '-date_posted')
   return render(request, 'portfolio/portfolio.html', {'projects': projects})
 
 
