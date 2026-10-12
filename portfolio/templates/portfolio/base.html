@@ -6,15 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Search Engine Optimization (SEO) -->
-    <title>{% block title %}Best One Young Society | Boys Foundation NGO Kovur{% endblock title %}</title>
-    <meta name="description" content="Best One Young Society (Boys Foundation) is a registered non-profit trust (Reg No: 455/2024) in Kovur, Nellore, dedicated to youth empowerment, food distribution, and social welfare.">
-    <meta name="keywords" content="Boys Foundation, Best One Young Society, NGO Nellore, Kovur NGO, Food Donation Trust, Youth Empowerment Andhra Pradesh">
-    <meta name="robots" content="index, follow">
+    <title>{% block title %}Boys Foundation | Best One Young Society NGO Kovur Nellore{% endblock title %}</title>
+    <meta name="description" content="Boys Foundation (Best One Young Society) is a registered non-profit trust (Reg No: 455/2024) in Kovur, Nellore. Dedicated to youth empowerment, educational aid, food donation drives, and social welfare.">
+    <meta name="keywords" content="Boys Foundation, boys foundation, Best One Young Society, NGO Nellore, Kovur NGO, Food Donation Trust, Youth Empowerment Andhra Pradesh, boys foundation kovur">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <link rel="canonical" href="https://boysfoundation.in/">
+
+    <!-- Open Graph Tags (For Social Media & Search Engine Cards) -->
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Boys Foundation | Best One Young Society NGO Kovur" />
+    <meta property="og:description" content="Official website of Boys Foundation (Best One Young Society), a registered non-profit trust in Kovur, Nellore." />
+    <meta property="og:url" content="https://boysfoundation.in/" />
+    <meta property="og:site_name" content="Boys Foundation" />    
     
+    <!-- Structured Schema Markup for Google Search Bots -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Boys Foundation",
+      "alternateName": "Best One Young Society",
+      "url": "https://boysfoundation.in/",
+      "logo": "https://boysfoundation.in/static/logo.png",
+      "description": "A registered non-profit trust dedicated to youth empowerment, educational aid, food distribution drives, and social welfare in Kovur, Nellore.",
+      "telephone": "+91-8499938804",
+      "email": "boysfoundation2016@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kovur",
+        "addressRegion": "Andhra Pradesh",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
+
     <!-- Favicon (Browser Tab Logo) -->
     <link rel="icon" type="image/png" href="{% static 'logo.png' %}">
-    
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -276,10 +305,10 @@
     <!-- Header Navigation -->
     <header>
         <a href="/" class="brand-container">
-            <img src="{% static 'logo.png' %}" alt="Best_One_Young_Society Logo">
+            <img src="{% static 'logo.png' %}" alt="Boys Foundation - Best One Young Society Logo">
             <div class="brand-title">
-                <h2>Best_One_Young_Society</h2>
-                <p>Trust Registered 455/2024 — Serving Communities, Building Futures</p>
+                <h2>Boys Foundation</h2>
+                <p>Best One Young Society — Reg. 455/2024</p>
             </div>
         </a>
 
@@ -302,8 +331,8 @@
         <div class="footer-container">
             <!-- Column 1: Organization Summary -->
             <div class="footer-col">
-                <h3>Best_One_Young_Society</h3>
-                <p>A registered non-profit trust dedicated to facilitating youth empowerment, educational aid, food distribution drives, and holistic social welfare.</p>
+                <h3>Boys Foundation</h3>
+                <p>Best One Young Society is a registered non-profit trust dedicated to youth empowerment, educational aid, food distribution drives, and holistic social welfare.</p>
                 <p><small><i class="fa-solid fa-certificate" style="color: #4ade80;"></i> Reg. No: <strong>455/2024</strong></small></p>
             </div>
 
@@ -339,7 +368,7 @@
 
         <!-- Bottom Copyright Bar -->
         <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} <strong>Best_One_Young_Society</strong> (Reg. No: 455/2024). All Rights Reserved.</p>
+            <p>&copy; {% now "Y" %} <strong>Boys Foundation (Best One Young Society)</strong> (Reg. No: 455/2024). All Rights Reserved.</p>
         </div>
     </footer>
 
