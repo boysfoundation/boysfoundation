@@ -27,3 +27,24 @@ select:focus {
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
+/* ==========================================================================
+   Unfold Login Form Header Logo Fix
+   ========================================================================== */
+
+/* Inject centered logo right above the login title */
+body.login form::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    background-image: url('/static/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Ensure the login form container is centered on screen */
+body.login .min-h-screen {
+    justify-content: center !important;
+}
