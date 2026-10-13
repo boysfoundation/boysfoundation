@@ -222,7 +222,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_fixed": False,  # Changed from True to False
     "sidebar": "sidebar-dark-primary",
     "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": False,
+    "sidebar_disable_expand": True,
     "sidebar_nav_child_indent": False,
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
