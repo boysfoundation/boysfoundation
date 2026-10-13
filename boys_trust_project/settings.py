@@ -184,9 +184,7 @@ UNFOLD = {
     "SITE_HEADER": "Boys Foundation",
     "SITE_URL": "/",
     "SITE_ICON": lambda request: "/static/logo.png",
-    "LOGIN": {
-        "image": lambda request: "/static/logo.png",
-    },
+    "LOGIN": {},
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     
