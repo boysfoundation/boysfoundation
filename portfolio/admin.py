@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Project, ProjectImage, ContactMessage, DonationPayment
 from .models import BloodDonor
+from .models import TeamMember, Award  # plus your existing Project model
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -25,3 +26,15 @@ class BloodDonorAdmin(admin.ModelAdmin):
     list_display = ('name', 'blood_group', 'phone', 'location', 'date_registered')
     list_filter = ('blood_group', 'location')
     search_fields = ('name', 'phone', 'location')
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'display_order')
+    list_editable = ('display_order',)
+    search_fields = ('name', 'role')
+
+@admin.register(Award)
+class AwardAdmin(admin.ModelAdmin):
+    list_display = ('title', 'issued_by', 'year', 'display_order')
+    list_editable = ('display_order',)
+    search_fields = ('title', 'issued_by')
