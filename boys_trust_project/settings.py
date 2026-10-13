@@ -190,12 +190,51 @@ JAZZMIN_SETTINGS = {
     # Brand name at the top left header
     "site_brand": "Best One Young Society",
 
+    # Relative path inside your static folder
+    "site_logo": "logo.png",
+
+    # Logo shown on the login page
+    "login_logo": "logo.png",
+
     # Welcome text on the login screen
     "welcome_sign": "Welcome to Boys Foundation Portal",
 
     # Copyright notice in footer
     "copyright": "Best One Young Society (Reg. No: 455/2024)",
 
-    # Enables live interactive theme builder in the top right corner
+    # Enables live interactive theme builder
     "show_ui_builder": True,
+}
+
+# --- ADD THIS BLOCK TO FIX LAYOUT & ALIGNMENT ---
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,  # Changed from True to False
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
 }
