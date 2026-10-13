@@ -187,6 +187,9 @@ UNFOLD = {
     "SITE_ICON": lambda request: "/static/logo.png",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
+    "STYLES": [
+        lambda request: static("unfold_fix.css"),
+    ],
     "COLORS": {
         "primary": {
             "50": "239 246 255",
