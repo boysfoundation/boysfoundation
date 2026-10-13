@@ -260,28 +260,35 @@
             margin: 0;
         }
 
-        /* SECTION 3: TEAM MEMBERS GRID */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 25px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .team-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 28px 20px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
-        }
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
-            border-color: #cbd5e1;
-        }
+        /* FLEXBOX TEAM GRID FOR PERFECT CARD SIZING & ALIGNMENT */
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Or use 'center' if you want them centered in the row */
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.team-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    /* Sets a fixed flexible card width so cards maintain clean proportions */
+    flex: 1 1 240px;
+    max-width: 280px; 
+    box-sizing: border-box;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    border-color: #cbd5e1;
+}
         .team-avatar-container {
             position: relative;
             width: 105px;
