@@ -1,0 +1,56 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ event.title }} | Boys Foundation{% endblock title %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <!-- Back Button -->
+    <a href="{% url 'home' %}" style="display: inline-flex; align-items: center; gap: 8px; color: #16a34a; font-weight: 700; text-decoration: none; margin-bottom: 25px; transition: transform 0.2s;">
+        <i class="fa-solid fa-arrow-left"></i> Back to Homepage
+    </a>
+
+    <div style="background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+        
+        <!-- Full Event Poster Display -->
+        {% if event.poster %}
+            <div style="background-color: #0f172a; width: 100%; max-height: 600px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('{{ event.poster.url }}'); background-size: cover; background-position: center; filter: blur(15px) opacity(0.3);"></div>
+                <img src="{{ event.poster.url }}" alt="{{ event.title }}" style="max-width: 100%; max-height: 580px; width: auto; height: auto; object-fit: contain; position: relative; z-index: 1; display: block; padding: 15px 0;">
+            </div>
+        {% endif %}
+
+        <!-- Event Full Info -->
+        <div style="padding: 35px 30px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin-bottom: 15px;">
+                <span style="background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; padding: 6px 16px; border-radius: 30px; font-weight: 800; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-calendar-days"></i> {{ event.event_date|date:"F d, Y" }}
+                </span>
+            </div>
+
+            <h1 style="font-size: 2.2rem; color: #0f172a; margin: 0 0 20px 0; font-weight: 800;">{{ event.title }}</h1>
+
+            {% if event.description %}
+                <div style="color: #334155; font-size: 1.05rem; line-height: 1.7; white-space: pre-line; margin-bottom: 30px;">
+                    {{ event.description }}
+                </div>
+            {% endif %}
+
+            <!-- Call to Action Buttons -->
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; border-top: 1px solid #e2e8f0; padding-top: 25px;">
+                <a href="https://wa.me/918499938804?text=Hello%20Boys%20Foundation,%20I%20want%20to%20know%20more/participate%20in%20{{ event.title|urlencode }}" 
+                   target="_blank" 
+                   style="background: #15803d; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 30px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-brands fa-whatsapp"></i> Inquire / Join Drive
+                </a>
+                
+                <a href="/donate/" 
+                   style="background: #dc2626; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 30px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-heart"></i> Support This Drive
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

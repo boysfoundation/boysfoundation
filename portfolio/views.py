@@ -279,3 +279,7 @@ def portfolio(request):
         'awards': awards,
     }
     return render(request, 'portfolio/portfolio.html', context)
+
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    return render(request, 'portfolio/event_detail.html', {'event': event})

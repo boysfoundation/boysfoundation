@@ -478,34 +478,42 @@
     <!-- Centered Flex Wrapper (Max 3 per row) -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; width: 100%; box-sizing: border-box;">
         {% for event in upcoming_events %}
-            <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; flex: 1 1 300px; max-width: 380px; min-width: 280px; box-sizing: border-box;">
-                
-                <!-- Poster Frame Container -->
-                {% if event.poster %}
-                    <div style="background-color: #0f172a; width: 100%; height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-                        <!-- Blurred Background Layer -->
-                        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('{{ event.poster.url }}'); background-size: cover; background-position: center; filter: blur(12px) opacity(0.35);"></div>
-                        
-                        <!-- Crisp Main Event Poster -->
-                        <img src="{{ event.poster.url }}" alt="{{ event.title }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; position: relative; z-index: 1; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-                    </div>
-                {% endif %}
-
-                <!-- Event Info Body -->
-                <div style="padding: 20px;">
-                    <div style="color: #16a34a; font-weight: 800; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-calendar-days" style="background: #f0fdf4; padding: 6px; border-radius: 50%; border: 1px solid #dcfce7;"></i> 
-                        {{ event.event_date|date:"F d, Y" }}
-                    </div>
+            <a href="{% url 'event_detail' event.pk %}" style="text-decoration: none; color: inherit; flex: 1 1 300px; max-width: 380px; min-width: 280px; box-sizing: border-box; display: block;">
+                <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;"
+                     onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.12)';"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.06)';">
                     
-                    <h3 style="margin: 8px 0 10px 0; color: #0f172a; font-size: 1.2rem; font-weight: 700; line-height: 1.35;">{{ event.title }}</h3>
-                    
-                    {% if event.description %}
-                        <p style="color: #64748b; font-size: 0.94rem; margin: 0; line-height: 1.55;">{{ event.description }}</p>
+                    <!-- Poster Frame Container -->
+                    {% if event.poster %}
+                        <div style="background-color: #0f172a; width: 100%; height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('{{ event.poster.url }}'); background-size: cover; background-position: center; filter: blur(12px) opacity(0.35);"></div>
+                            <img src="{{ event.poster.url }}" alt="{{ event.title }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; position: relative; z-index: 1; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                        </div>
                     {% endif %}
-                </div>
 
-            </div>
+                    <!-- Event Info Body -->
+                    <div style="padding: 20px;">
+                        <div style="color: #16a34a; font-weight: 800; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-calendar-days" style="background: #f0fdf4; padding: 6px; border-radius: 50%; border: 1px solid #dcfce7;"></i> 
+                            {{ event.event_date|date:"F d, Y" }}
+                        </div>
+                        
+                        <h3 style="margin: 8px 0 10px 0; color: #0f172a; font-size: 1.2rem; font-weight: 700; line-height: 1.35;">{{ event.title }}</h3>
+                        
+                        {% if event.description %}
+                            <p style="color: #64748b; font-size: 0.94rem; margin: 0; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                {{ event.description }}
+                            </p>
+                        {% endif %}
+
+                        <div style="margin-top: 15px; color: #16a34a; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                            <span>View Event Details</span>
+                            <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
         {% endfor %}
     </div>
 </section>
