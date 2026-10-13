@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Project, ProjectImage, ContactMessage, DonationPayment
 from .models import BloodDonor
 from .models import TeamMember, Award  # plus your existing Project model
+from .models import Event
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -38,3 +39,6 @@ class AwardAdmin(admin.ModelAdmin):
     list_display = ('title', 'issued_by', 'year', 'display_order')
     list_editable = ('display_order',)
     search_fields = ('title', 'issued_by')
+
+
+admin.site.register(Event)

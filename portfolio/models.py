@@ -91,6 +91,16 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.role}"
+    
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    event_date = models.DateField()
+    poster = models.ImageField(upload_to='event_posters/', blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 
 # --- AWARDS & RECOGNITION MODEL ---
