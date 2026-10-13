@@ -202,10 +202,12 @@ JAZZMIN_SETTINGS = {
     # Copyright notice in footer
     "copyright": "Best One Young Society (Reg. No: 455/2024)",
 
+    # --- FORCE NAVIGATION TO STAY EXPANDED ON ALL PAGES ---
+    "navigation_expanded": True,
+
     # Enables live interactive theme builder
     "show_ui_builder": True,
 }
-
 # --- ADD THIS BLOCK TO FIX LAYOUT & ALIGNMENT ---
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
