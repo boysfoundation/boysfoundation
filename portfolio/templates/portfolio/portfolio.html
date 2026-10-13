@@ -260,14 +260,23 @@
             margin: 0;
         }
 
-        /* FLEXBOX TEAM GRID FOR PERFECT CARD SIZING & ALIGNMENT */
+/* GRID WITH A MAXIMUM LIMIT OF 5 COLUMNS PER ROW */
 .team-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Or use 'center' if you want them centered in the row */
-    gap: 24px;
+    display: grid;
+    /* Automatically fits up to 5 equal-width columns per row, min-width 200px per card */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Limits the grid to a maximum of 5 columns */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* Fallback for smaller screens so it auto-adjusts nicely on tablets/phones */
+@media (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
 }
 
 .team-card {
@@ -278,9 +287,7 @@
     border: 1px solid #e2e8f0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     transition: all 0.3s ease;
-    /* Sets a fixed flexible card width so cards maintain clean proportions */
-    flex: 1 1 240px;
-    max-width: 280px; 
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -289,7 +296,8 @@
     box-shadow: 0 10px 22px rgba(0,0,0,0.08);
     border-color: #cbd5e1;
 }
-        .team-avatar-container {
+
+.team-avatar-container {
             position: relative;
             width: 105px;
             height: 105px;
