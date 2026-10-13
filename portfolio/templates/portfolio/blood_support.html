@@ -187,11 +187,11 @@
 
             <form action="{% url 'blood_support' %}" method="POST" class="donor-form">
                 {% csrf_token %}
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" placeholder="e.g. Rahul Verma" required>
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
 
                 <label for="phone">Phone / WhatsApp Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" required>
+                <input type="tel" id="phone" name="phone" placeholder="9876543210" required>
 
                 <label for="blood_group">Blood Group *</label>
                 <select id="blood_group" name="blood_group" required>
