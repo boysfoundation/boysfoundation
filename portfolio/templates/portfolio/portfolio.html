@@ -1,213 +1,521 @@
 {% extends 'portfolio/base.html' %}
 
-{% block title %}Our Portfolio, Awards & Team | Boys Foundation{% endblock title %}
+{% block title %}Our Impact, Awards & Team | Boys Foundation{% endblock title %}
 
 {% block content %}
     <style>
-        .portfolio-header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            background: white; 
-            padding: 40px 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
-        }
-        .portfolio-header h2 { color: #0056b3; font-size: 2.2rem; margin-bottom: 10px; }
-        .portfolio-header p { font-size: 1.1rem; color: #555; max-width: 700px; margin: 0 auto; }
-        
-        .section-title {
-            font-size: 1.8rem;
-            margin: 50px 0 25px 0;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* Base Container & Typography */
+        .portfolio-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 15px 50px 15px;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* Projects Section Styles */
-        .project-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 30px; 
-            align-items: start; 
-        }
-        
-        .project-card { 
-            background: white; 
-            border-radius: 10px; 
-            padding: 25px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            transition: transform 0.3s;
-        }
-        .project-card:hover { transform: translateY(-5px); }
-
-        .project-card h3 { margin-top: 15px; margin-bottom: 10px; }
-        .project-card h3 a { color: #007bff; text-decoration: none; }
-        .project-card h3 a:hover { text-decoration: underline; }
-        .project-card p { color: #444; line-height: 1.6; margin-bottom: 20px; }
-        .project-card small { color: #888; display: block; margin-top: 15px; border-top: 1px solid #f1f3f5; padding-top: 12px; }
-
-        .main-image-container {
-            width: 100%;
-            height: 220px;
+        /* Hero Header Section */
+        .portfolio-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 50px 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+            margin-bottom: 35px;
+            position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            border: 1px solid #e9ecef;
         }
-        .main-image-container img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            object-fit: contain; 
-            border-radius: 6px; 
+        .portfolio-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .portfolio-hero p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 720px;
+            margin: 0 auto 25px auto;
+            line-height: 1.6;
         }
 
-        /* Awards Section Styles */
+        /* Impact Stats Bar */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Interactive Category Tabs */
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .tab-btn.active {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Section Title Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 45px 0 25px 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .section-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* SECTION 1: PROJECTS GRID */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+        .project-card {
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+        .project-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #f8fafc;
+            overflow: hidden;
+        }
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .project-card:hover .project-image-wrapper img {
+            transform: scale(1.05);
+        }
+        .project-body {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            line-height: 1.35;
+        }
+        .project-title a {
+            color: #0f172a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .project-title a:hover {
+            color: #2563eb;
+        }
+        .project-desc {
+            color: #64748b;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .project-footer {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* SECTION 2: AWARDS GRID */
         .awards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
         .award-card {
-            background: #fffdf5;
+            background: linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
             border: 1px solid #fef3c7;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
-            transition: transform 0.3s;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .award-card:hover { transform: translateY(-5px); }
-        .award-icon { font-size: 2rem; color: #d97706; margin-bottom: 12px; }
-        .award-card h3 { margin: 0 0 8px 0; color: #78350f; font-size: 1.3rem; }
-        .award-meta { color: #b45309; font-weight: 600; font-size: 0.95rem; margin-bottom: 10px; }
-        .award-card p { color: #451a03; line-height: 1.5; font-size: 0.95rem; margin: 0; }
+        .award-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.12);
+        }
+        .award-badge-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #fef3c7;
+            color: #d97706;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+        .award-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #78350f;
+            margin: 0 0 8px 0;
+        }
+        .award-issuer {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #b45309;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .award-desc {
+            font-size: 0.88rem;
+            color: #451a03;
+            line-height: 1.55;
+            margin: 0;
+        }
 
-        /* Team Section Styles */
+        /* SECTION 3: TEAM MEMBERS GRID */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 25px;
         }
         .team-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px 20px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 28px 20px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
             border: 1px solid #e2e8f0;
-            transition: transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
         }
-        .team-card:hover { transform: translateY(-5px); }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
+        }
+        .team-avatar-container {
+            position: relative;
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 16px auto;
+        }
         .team-avatar {
-            width: 110px;
-            height: 110px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 15px auto;
-            border: 3px solid #15803d;
+            border: 3px solid #16a34a;
+            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.15);
         }
         .team-avatar-placeholder {
-            width: 110px;
-            height: 110px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             background: #f1f5f9;
             color: #64748b;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 15px auto;
+            font-size: 2.2rem;
             border: 3px solid #cbd5e1;
         }
-        .team-card h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: #1e293b; }
-        .team-role { color: #15803d; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
-        .team-bio { color: #64748b; font-size: 0.88rem; line-height: 1.4; margin: 0; }
+        .team-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 4px 0;
+        }
+        .team-role {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #16a34a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .team-bio {
+            font-size: 0.86rem;
+            color: #64748b;
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        /* Empty State Placeholder Styles */
+        .empty-placeholder {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px dashed #cbd5e1;
+            color: #64748b;
+        }
+
+        /* Utility Hidden Class for Tabs Filter */
+        .tab-hidden {
+            display: none !important;
+        }
     </style>
 
-    <div class="portfolio-header">
-        <h2>Our Journey, Impact & Team</h2>
-        <p>Explore the full record of community welfare drives, youth empowerment programs, awards received, and the dedicated members behind Boys Foundation.</p>
-    </div>
+    <div class="portfolio-wrapper">
 
-    <!-- SECTION 1: PROJECTS & INITIATIVES -->
-    <h2 class="section-title" style="color: #0056b3; border-bottom: 3px solid #0056b3;">
-        <i class="fa-solid fa-diagram-project"></i> Our Projects & Drives
-    </h2>
-    <div class="project-grid">
-        {% for project in projects %}
-            <div class="project-card">
-                {% if project.image %}
-                    <a href="{% url 'project_detail' project.pk %}">
-                        <div class="main-image-container">
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        <!-- HERO HEADER -->
+        <div class="portfolio-hero">
+            <h1>Our Impact, Honors & Team</h1>
+            <p>Empowering local youth and driving impactful community development through social drives, transparent service, and dedicated leadership.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-badge">
+                    <i class="fa-solid fa-layer-group" style="color: #60a5fa;"></i>
+                    <span>{{ projects|length }} Initiatives</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i>
+                    <span>{{ awards|length }} Recognitions</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fa-solid fa-users" style="color: #4ade80;"></i>
+                    <span>{{ team_members|length }} Core Members</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY FILTER TABS -->
+        <div class="portfolio-tabs">
+            <button class="tab-btn active" onclick="filterPortfolio('all', this)">
+                <i class="fa-solid fa-grid-2"></i> All Overview
+            </button>
+            <button class="tab-btn" onclick="filterPortfolio('projects', this)">
+                <i class="fa-solid fa-diagram-project"></i> Projects & Drives
+            </button>
+            <button class="tab-btn" onclick="filterPortfolio('awards', this)">
+                <i class="fa-solid fa-award"></i> Awards & Recognition
+            </button>
+            <button class="tab-btn" onclick="filterPortfolio('team', this)">
+                <i class="fa-solid fa-user-group"></i> Key Members
+            </button>
+        </div>
+
+        <!-- SECTION 1: PROJECTS & INITIATIVES -->
+        <div id="section-projects" class="portfolio-section">
+            <div class="section-header">
+                <h2 style="color: #1e3a8a;">
+                    <i class="fa-solid fa-diagram-project"></i> Community Projects & Drives
+                </h2>
+            </div>
+            
+            <div class="project-grid">
+                {% for project in projects %}
+                    <div class="project-card">
+                        {% if project.image %}
+                            <div class="project-image-wrapper">
+                                <a href="{% url 'project_detail' project.pk %}">
+                                    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        <div class="project-body">
+                            <h3 class="project-title">
+                                <a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a>
+                            </h3>
+                            <p class="project-desc">{{ project.description|truncatewords:22 }}</p>
+
+                            <div class="project-footer">
+                                <span><i class="fa-regular fa-calendar-check"></i> {{ project.date_posted|date:"M d, Y" }}</span>
+                                <a href="{% url 'project_detail' project.pk %}" style="color: #2563eb; font-weight: 600; text-decoration: none;">View Details &rarr;</a>
+                            </div>
                         </div>
-                    </a>
-                {% endif %}
-
-                <h3><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></h3>
-                <p>{{ project.description|truncatewords:25 }}</p>
-
-                <small>Posted on: {{ project.date_posted|date:"F d, Y" }}</small>
-            </div>
-        {% empty %}
-            <p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">No projects added yet.</p>
-        {% endfor %}
-    </div>
-
-    <!-- SECTION 2: AWARDS & RECOGNITION -->
-    <h2 class="section-title" style="color: #d97706; border-bottom: 3px solid #d97706;">
-        <i class="fa-solid fa-trophy"></i> Awards & Recognition
-    </h2>
-    <div class="awards-grid">
-        {% for award in awards %}
-            <div class="award-card">
-                {% if award.image %}
-                    <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 15px;">
-                        <img src="{{ award.image.url }}" alt="{{ award.title }}" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                {% else %}
-                    <div class="award-icon"><i class="fa-solid fa-award"></i></div>
-                {% endif %}
-                <h3>{{ award.title }}</h3>
-                {% if award.issued_by or award.year %}
-                    <div class="award-meta">
-                        {% if award.issued_by %}{{ award.issued_by }}{% endif %}
-                        {% if award.year %}({{ award.year }}){% endif %}
+                {% empty %}
+                    <div class="empty-placeholder">
+                        <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 8px; color: #94a3b8;"></i>
+                        <p style="margin: 0;">No active projects listed at the moment.</p>
                     </div>
-                {% endif %}
-                {% if award.description %}
-                    <p>{{ award.description }}</p>
-                {% endif %}
+                {% endfor %}
             </div>
-        {% empty %}
-            <p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">Awards and recognitions will be listed soon.</p>
-        {% endfor %}
+        </div>
+
+        <!-- SECTION 2: AWARDS & RECOGNITION -->
+        <div id="section-awards" class="portfolio-section">
+            <div class="section-header">
+                <h2 style="color: #d97706;">
+                    <i class="fa-solid fa-trophy"></i> Awards & Honors
+                </h2>
+            </div>
+
+            <div class="awards-grid">
+                {% for award in awards %}
+                    <div class="award-card">
+                        {% if award.image %}
+                            <div style="width: 100%; height: 160px; border-radius: 10px; overflow: hidden; margin-bottom: 15px;">
+                                <img src="{{ award.image.url }}" alt="{{ award.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        {% else %}
+                            <div class="award-badge-icon">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                        {% endif %}
+
+                        <h3>{{ award.title }}</h3>
+                        
+                        {% if award.issued_by or award.year %}
+                            <div class="award-issuer">
+                                <i class="fa-solid fa-ribbon"></i>
+                                <span>{{ award.issued_by }}{% if award.year %} ({{ award.year }}){% endif %}</span>
+                            </div>
+                        {% endif %}
+
+                        {% if award.description %}
+                            <p class="award-desc">{{ award.description }}</p>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <div class="empty-placeholder">
+                        <i class="fa-solid fa-medal" style="font-size: 2rem; margin-bottom: 8px; color: #94a3b8;"></i>
+                        <p style="margin: 0;">Awards and official recognitions will be updated shortly.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- SECTION 3: KEY MEMBERS & VOLUNTEERS -->
+        <div id="section-team" class="portfolio-section">
+            <div class="section-header">
+                <h2 style="color: #15803d;">
+                    <i class="fa-solid fa-users"></i> Core Team & Leaders
+                </h2>
+            </div>
+
+            <div class="team-grid">
+                {% for member in team_members %}
+                    <div class="team-card">
+                        <div class="team-avatar-container">
+                            {% if member.image %}
+                                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-avatar">
+                            {% else %}
+                                <div class="team-avatar-placeholder">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <h3>{{ member.name }}</h3>
+                        <div class="team-role">{{ member.role }}</div>
+                        
+                        {% if member.bio %}
+                            <p class="team-bio">{{ member.bio }}</p>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <div class="empty-placeholder">
+                        <i class="fa-solid fa-users-slash" style="font-size: 2rem; margin-bottom: 8px; color: #94a3b8;"></i>
+                        <p style="margin: 0;">Team profiles coming soon.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 
-    <!-- SECTION 3: KEY MEMBERS & VOLUNTEERS -->
-    <h2 class="section-title" style="color: #15803d; border-bottom: 3px solid #15803d;">
-        <i class="fa-solid fa-users"></i> Key Members & Volunteers
-    </h2>
-    <div class="team-grid">
-        {% for member in team_members %}
-            <div class="team-card">
-                {% if member.image %}
-                    <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-avatar">
-                {% else %}
-                    <div class="team-avatar-placeholder"><i class="fa-solid fa-user"></i></div>
-                {% endif %}
-                <h3>{{ member.name }}</h3>
-                <div class="team-role">{{ member.role }}</div>
-                {% if member.bio %}
-                    <p class="team-bio">{{ member.bio }}</p>
-                {% endif %}
-            </div>
-        {% empty %}
-            <p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">Team members list coming soon.</p>
-        {% endfor %}
-    </div>
+    <!-- JavaScript For Category Tab Switching -->
+    <script>
+        function filterPortfolio(category, element) {
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Set clicked button to active
+            element.classList.add('active');
+
+            const projSection = document.getElementById('section-projects');
+            const awardSection = document.getElementById('section-awards');
+            const teamSection = document.getElementById('section-team');
+
+            if (category === 'all') {
+                projSection.classList.remove('tab-hidden');
+                awardSection.classList.remove('tab-hidden');
+                teamSection.classList.remove('tab-hidden');
+            } else if (category === 'projects') {
+                projSection.classList.remove('tab-hidden');
+                awardSection.classList.add('tab-hidden');
+                teamSection.classList.add('tab-hidden');
+            } else if (category === 'awards') {
+                projSection.classList.add('tab-hidden');
+                awardSection.classList.remove('tab-hidden');
+                teamSection.classList.add('tab-hidden');
+            } else if (category === 'team') {
+                projSection.classList.add('tab-hidden');
+                awardSection.classList.add('tab-hidden');
+                teamSection.classList.remove('tab-hidden');
+            }
+        }
+    </script>
 {% endblock content %}
