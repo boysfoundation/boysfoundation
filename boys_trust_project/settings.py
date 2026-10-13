@@ -204,9 +204,11 @@ JAZZMIN_SETTINGS = {
 
     # --- FORCE NAVIGATION TO STAY EXPANDED ON ALL PAGES ---
     "navigation_expanded": True,
+    "custom_css": "custom_admin.css",
 
     # Enables live interactive theme builder
     "show_ui_builder": True,
+    "custom_js": "data:text/javascript,document.addEventListener('DOMContentLoaded',function(){document.body.classList.remove('sidebar-collapse');localStorage.removeItem('remember');});"
 }
 # --- ADD THIS BLOCK TO FIX LAYOUT & ALIGNMENT ---
 JAZZMIN_UI_TWEAKS = {
