@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Modern Professional Django Admin Theme
+   ========================================================================== */
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --header-bg: #0f172a;
+  --header-text: #f8fafc;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --radius: 8px;
+}
+
+/* Overall Body Styling */
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Header & Navigation Bar */
+#header {
+  background: var(--header-bg) !important;
+  color: var(--header-text) !important;
+  padding: 14px 24px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+#header a:link, #header a:visited {
+  color: #f1f5f9 !important;
+}
+
+#site-name a {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* User Tools Links in Header */
+#user-tools {
+  font-size: 0.875rem !important;
+}
+
+/* Main Container Padding & Cards */
+#container {
+  background-color: var(--bg-main) !important;
+}
+
+.module {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 24px !important;
+  overflow: hidden !important;
+}
+
+/* App Headers & Captions */
+.module h2, .module caption, header.module h2 {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Data Tables */
+#result_list {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+}
+
+#result_list th {
+  background: #f8fafc !important;
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+#result_list td {
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  font-size: 0.875rem !important;
+}
+
+#result_list tr:hover td {
+  background-color: #f1f5f9 !important;
+}
+
+/* Buttons Styling */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: var(--primary-color) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  transition: background-color 0.15s ease-in-out !important;
+  cursor: pointer !important;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
+  background: var(--primary-hover) !important;
+}
+
+.submit-row input.default {
+  background: var(--primary-color) !important;
+}
+
+.deletelink, .button.deletelink {
+  background: var(--danger-color) !important;
+}
+
+/* Form Inputs & Fields */
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=url], textarea, select {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  font-size: 0.875rem !important;
+  background-color: #ffffff !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  outline: none !important;
+}
+
+/* Breadcrumb Navigation */
+div.breadcrumbs {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  font-size: 0.875rem !important;
+  padding: 16px 24px 8px 24px !important;
+}
+
+div.breadcrumbs a {
+  color: var(--primary-color) !important;
+}
