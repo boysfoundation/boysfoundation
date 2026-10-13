@@ -9,7 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 from .models import ContactMessage, DonationPayment, Project
 from .models import BloodDonor
-from .models import Project, TeamMember, Award  # adjust to match your Project model name
+from .models import Project, TeamMember, Award
+from .models import Event
 
 logger = logging.getLogger(__name__)
 
@@ -20,8 +21,17 @@ razorpay_client = razorpay.Client(
 
 
 def home(request):
-  projects = Project.objects.all().order_by('order', '-date_posted')
-  return render(request, 'portfolio/home.html', {'projects': projects})
+    projects = Project.objects.all().order_by('order', '-date_posted')
+    
+    # Retrieve active/upcoming events
+    upcoming_events = Event.objects.filter(is_active=True).order_by('-event_date')
+    
+    context = {
+        'projects': projects,
+        'upcoming_events': upcoming_events,
+    }
+    return render(request, 'portfolio/home.html', context)
+
 
 
 def portfolio(request):
