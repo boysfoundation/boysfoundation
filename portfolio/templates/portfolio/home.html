@@ -313,51 +313,134 @@
         color: #94a3b8;
     }
 
-    /* Callout Banner */
+/* Premium Callout Banner Redesign */
     .callout-box {
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        position: relative;
+        background: linear-gradient(135deg, #15803d 0%, #166534 100%);
         color: #ffffff;
-        padding: 50px 30px;
+        padding: 55px 40px;
         border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(22, 163, 74, 0.2);
-        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(21, 128, 61, 0.2);
+        margin-bottom: 35px;
+        width: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 35px;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Subtle decorative background pattern */
+    .callout-box::after {
+        content: "";
+        position: absolute;
+        right: -30px;
+        bottom: -30px;
+        width: 280px;
+        height: 280px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm3.845 14.507a2.53 2.53 0 01-1.688.752H9.843a2.53 2.53 0 01-1.688-.752.5.5 0 01-.01-.69l3.012-3.23a1.53 1.53 0 012.308 0l3.012 3.23a.5.5 0 01-.01.69zm1.189-6.39l-2.012 2.164a3.52 3.52 0 00-4.634 0L8.376 9.117a.5.5 0 01-.01-.69 2.53 2.53 0 011.688-.752h4.316c.642 0 1.258.267 1.688.752a.5.5 0 01-.01.69z"/></svg>');
+        background-repeat: no-repeat;
+        background-size: contain;
+        opacity: 0.08;
+        pointer-events: none;
+    }
+
+    .callout-content {
+        position: relative;
+        z-index: 1;
+        text-align: left;
     }
 
     .callout-box h2 {
         color: #ffffff;
-        font-size: 2.2rem;
+        font-size: 2.3rem;
         font-weight: 800;
+        margin-top: 0;
         margin-bottom: 12px;
         letter-spacing: -0.5px;
+        line-height: 1.2;
     }
 
     .callout-box p {
         color: #dcfce7;
         font-size: 1.1rem;
-        max-width: 650px;
-        margin: 0 auto 28px auto;
+        max-width: 600px;
+        margin: 0 0 20px 0;
         line-height: 1.6;
+    }
+
+    /* Trust Credibility Badges */
+    .callout-badges {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .callout-badge-item {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #f0fdf4;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Action Container & Button */
+    .callout-action {
+        position: relative;
+        z-index: 1;
+        text-align: center;
     }
 
     .callout-box .btn-white {
         background-color: #ffffff;
         color: #15803d;
-        padding: 14px 32px;
-        border-radius: 30px;
+        padding: 16px 36px;
+        border-radius: 35px;
         font-weight: 800;
+        font-size: 1.1rem;
         text-decoration: none;
-        transition: all 0.25s ease;
+        transition: all 0.3s ease;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 320px;
+        box-sizing: border-box;
     }
 
     .callout-box .btn-white:hover {
         background-color: #f8fafc;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22);
+    }
+
+    /* Responsive adjustment for Mobile & Tablet */
+    @media (max-width: 868px) {
+        .callout-box {
+            grid-template-columns: 1fr;
+            padding: 40px 25px;
+            text-align: center;
+        }
+        .callout-content {
+            text-align: center;
+        }
+        .callout-box p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .callout-badges {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
     }
 </style>
 
@@ -464,12 +547,28 @@
         {% endfor %}
     </div>
 
-    <!-- CALLOUT DONATION BANNER -->
-    <div class="callout-box">
+<!-- Callout Banner -->
+<div class="callout-box">
+    <!-- Left Text & Trust Badges -->
+    <div class="callout-content">
         <h2>Make a Real Difference Today</h2>
-        <p>Your contribution directly funds food distribution, youth guidance kits, and emergency blood support drives.</p>
-        <a href="/donate/" class="btn-white"><i class="fa-solid fa-hand-holding-dollar"></i> Donate Now & Join Our Cause</a>
+        <p>Your transparent contribution directly funds food distribution drives, provides youth guidance kits, and supports emergency blood assistance networks.</p>
+        
+        <div class="callout-badges">
+            <div class="callout-badge-item">
+                <i class="fa-solid fa-user-check" style="color: #86efac;"></i> 1,200+ Lives Impacted
+            </div>
+            <div class="callout-badge-item">
+                <i class="fa-solid fa-shield-heart" style="color: #60a5fa;"></i> 100% Direct Welfare
+            </div>
+        </div>
     </div>
 
+    <!-- Right Action Button -->
+    <div class="callout-action">
+        <a href="/donate/" class="btn-white">
+            <i class="fa-solid fa-hand-holding-dollar"></i> Donate Now & Join Our Cause
+        </a>
+    </div>
 </div>
 {% endblock content %}
