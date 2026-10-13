@@ -27,3 +27,59 @@ select:focus {
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
+/* ==========================================================================
+   Modern Professional Login Page Styling for Unfold
+   ========================================================================== */
+
+/* Full page background */
+body.login {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Centered login card box */
+body.login #container {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+    padding: 32px !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    border: none !important;
+}
+
+/* Header title inside login card */
+body.login #header, 
+body.login h1, 
+body.login .branding {
+    background: transparent !important;
+    color: #1e293b !important;
+    text-align: center;
+    padding: 0 !important;
+    margin-bottom: 24px !important;
+    box-shadow: none !important;
+}
+
+body.login h1 a {
+    color: #0f172a !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+}
+
+/* Login submit button */
+body.login .submit-row input[type="submit"] {
+    width: 100% !important;
+    background-color: #2563eb !important;
+    border-radius: 6px !important;
+    padding: 10px !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-top: 12px !important;
+}
+
+body.login .submit-row input[type="submit"]:hover {
+    background-color: #1d4ed8 !important;
+}
