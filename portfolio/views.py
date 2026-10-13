@@ -258,7 +258,7 @@ def blood_support(request):
     return render(request, 'portfolio/blood_support.html')
 
 
-def portfolio_view(request):
+def portfolio(request):
     projects = Project.objects.all()
     team_members = TeamMember.objects.all()
     awards = Award.objects.all()
