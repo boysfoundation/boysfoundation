@@ -13,13 +13,12 @@
     <link rel="canonical" href="https://boysfoundation.in/">
 
     <!-- Open Graph Tags (For Social Media & Search Engine Cards) -->
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Boys Foundation | Best One Young Society NGO Kovur" />
-    <meta property="og:description" content="Official website of Boys Foundation (Best One Young Society), a registered non-profit trust in Kovur, Nellore." />
-    <meta property="og:url" content="https://boysfoundation.in/" />
-    <meta property="og:site_name" content="Boys Foundation" />    
-    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://boysfoundation.in/">
+    <meta property="og:title" content="Boys Foundation | Best One Young Society">
+    <meta property="og:description" content="Registered non-profit trust (Reg No: 455/2024) in Kovur, Nellore. Dedicated to youth empowerment, food drives, and direct community support.">
+    <meta property="og:image" content="https://boysfoundation.in{% static 'logo.png' %}">
+
     <!-- Structured Schema Markup for Google Search Bots -->
     <script type="application/ld+json">
     {
@@ -393,6 +392,59 @@
             text-align: center;
         }
     }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 58px;
+        height: 58px;
+        background-color: #25d366;
+        color: #ffffff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        animation: pulse-green 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+        background-color: #1eb855;
+        color: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6);
+    }
+
+    /* Subtle pulse effect */
+    @keyframes pulse-green {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
+
+    /* Mobile Responsive Position */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+            width: 52px;
+            height: 52px;
+            font-size: 26px;
+        }
+    }
         </style>
 </head>
 <body>
@@ -467,6 +519,13 @@
             <p>&copy; {% now "Y" %} <strong>Boys Foundation (Best One Young Society)</strong> (Reg. No: 455/2024). All Rights Reserved.</p>
         </div>
     </footer>
-
+<!-- Floating WhatsApp Widget -->
+<a href="https://wa.me/918499938804?text=Hello%20Boys%20Foundation,%20I%20would%20like%20to%20know%20more%20about%20your%20initiatives." 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   title="Chat with us on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
 </body>
 </html>
