@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 from .models import ContactMessage, DonationPayment, Project
 from .models import BloodDonor
+from .models import Project, TeamMember, Award  # adjust to match your Project model name
 
 logger = logging.getLogger(__name__)
 
@@ -255,3 +256,16 @@ def blood_support(request):
             messages.error(request, "Please fill in all required fields.")
 
     return render(request, 'portfolio/blood_support.html')
+
+
+def portfolio_view(request):
+    projects = Project.objects.all()
+    team_members = TeamMember.objects.all()
+    awards = Award.objects.all()
+
+    context = {
+        'projects': projects,
+        'team_members': team_members,
+        'awards': awards,
+    }
+    return render(request, 'portfolio/portfolio.html', context)
