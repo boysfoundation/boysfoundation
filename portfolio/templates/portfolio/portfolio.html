@@ -137,28 +137,37 @@
             border-color: #cbd5e1;
         }
 
-        /* FIXED IMAGE CONTAINER FOR PROPER COLLAGE / IMAGE ALIGNMENT */
-        .project-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 230px;
-            background: #f8fafc;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .project-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: transform 0.4s ease;
-        }
-        .project-card:hover .project-image-wrapper img {
-            transform: scale(1.03);
-        }
+/* FIXED FULL-BLEED IMAGE CONTAINER */
+.project-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #f1f5f9;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-top-left-radius: 13px;  /* Matches project card top curve */
+    border-top-right-radius: 13px;
+}
+
+.project-image-wrapper a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.project-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image-wrapper img {
+    transform: scale(1.04);
+}
 
         .project-body {
             padding: 22px;
