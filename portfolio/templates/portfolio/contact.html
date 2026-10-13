@@ -1,182 +1,454 @@
 {% extends 'portfolio/base.html' %}
+{% load static %}
 
-{% block title %}Contact Us - Best_One _Young_Society{% endblock title %}
+{% block title %}Contact Us | Boys Foundation (Best One Young Society){% endblock title %}
 
 {% block content %}
 <style>
-    .contact-hero {
-        text-align: center;
-        padding: 45px 20px;
-        background: linear-gradient(135deg, #1e4d2b, #2e6f40);
-        color: white;
-        border-radius: 12px;
-        margin-bottom: 35px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* Global Container Wrapper */
+    .contact-wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 20px 50px 20px;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
-    .contact-hero h2 { font-size: 2.3rem; margin-bottom: 10px; }
 
+    /* REDESIGNED GRADIENT HERO BANNER (Non-White) */
+    .contact-hero-vibrant {
+        position: relative;
+        background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 55%, #14532d 100%);
+        color: #ffffff;
+        padding: 55px 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(11, 19, 41, 0.25);
+        margin-bottom: 35px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 35px;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+    }
+
+    .hero-text-side h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 0;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+        line-height: 1.22;
+    }
+
+    .hero-text-side p {
+        font-size: 1.08rem;
+        color: #e2e8f0;
+        margin: 0 0 24px 0;
+        line-height: 1.65;
+        max-width: 620px;
+    }
+
+    .contact-hero-badges {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .hero-tag {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Glassmorphic Quick Action Card */
+    .hero-quick-action {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        padding: 28px 24px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-status-dot {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #86efac;
+        margin-bottom: 12px;
+        background: rgba(22, 163, 74, 0.2);
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(134, 239, 172, 0.3);
+    }
+
+    .quick-status-dot::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        background-color: #4ade80;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #4ade80;
+    }
+
+    .quick-contact-btn {
+        background: #25d366;
+        color: #ffffff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    .quick-contact-btn:hover {
+        background: #1eb855;
+        transform: translateY(-2px);
+        color: #ffffff;
+    }
+
+    /* Contact Grid Layout */
     .contact-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
         gap: 30px;
         margin-bottom: 40px;
+        width: 100%;
     }
 
+    /* Cards */
     .contact-info-card, .contact-form-card {
-        background: white;
-        padding: 35px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        background: #ffffff;
+        padding: 38px 30px;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        border: 1px solid #e2e8f0;
+        border-top: 5px solid #16a34a;
+        display: flex;
+        flex-direction: column;
     }
 
     .contact-info-card h3, .contact-form-card h3 {
-        color: #1e4d2b;
+        color: #0f172a;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-top: 0;
         margin-bottom: 25px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
     }
 
+    .contact-info-card h3 i, .contact-form-card h3 i {
+        background: #f0fdf4;
+        color: #16a34a;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border: 1px solid #dcfce7;
+    }
+
+    /* Info Boxes */
     .info-box {
         display: flex;
         align-items: flex-start;
-        gap: 15px;
+        gap: 16px;
+        margin-bottom: 22px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        transition: background 0.2s;
+    }
+
+    .info-box:hover {
+        background: #f8fafc;
+    }
+
+    .info-box i {
+        font-size: 1.2rem;
+        color: #16a34a;
+        background: #f0fdf4;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #dcfce7;
+        flex-shrink: 0;
+    }
+
+    .info-content h4 {
+        margin: 0 0 4px 0;
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 1.02rem;
+    }
+
+    .info-content p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .info-link {
+        color: #16a34a;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+    .info-link:hover {
+        color: #15803d;
+        text-decoration: underline;
+    }
+
+    /* Form Fields */
+    .form-group {
         margin-bottom: 20px;
     }
-    .info-box i {
-        font-size: 1.4rem;
-        color: #2e6f40;
-        background: #e8f5e9;
-        padding: 12px;
-        border-radius: 50%;
-    }
-    .info-content h4 { margin: 0 0 4px 0; color: #222; }
-    .info-content p { margin: 0; color: #666; font-size: 0.95rem; }
 
-    /* Form Inputs */
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #333; font-size: 0.95rem; }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: #334155;
+        font-size: 0.95rem;
+    }
+
     .form-group input, .form-group textarea {
         width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        padding: 13px 16px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
         font-size: 1rem;
         box-sizing: border-box;
+        transition: all 0.25s ease;
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: inherit;
     }
+
     .form-group input:focus, .form-group textarea:focus {
-        border-color: #2e6f40;
         outline: none;
+        border-color: #16a34a;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12);
     }
 
+    /* Submit Button */
     .btn-submit {
-        background-color: #2e6f40;
-        color: white;
+        background-color: #16a34a;
+        color: #ffffff;
         border: none;
-        padding: 12px 25px;
-        font-size: 1rem;
-        font-weight: bold;
-        border-radius: 6px;
-        cursor: pointer;
+        padding: 16px;
         width: 100%;
-        transition: background 0.3s;
+        border-radius: 30px;
+        font-size: 1.08rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
-    .btn-submit:hover { background-color: #1e4d2b; }
 
+    .btn-submit:hover {
+        background-color: #15803d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+    }
+
+    /* Map Box */
+    .map-container {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        margin-top: 15px;
+    }
+
+    /* Alert */
     .alert-success {
-        background-color: #d4edda;
-        color: #155724;
-        padding: 15px;
-        border-radius: 6px;
+        background-color: #f0fdf4;
+        color: #14532d;
+        padding: 16px 20px;
+        border-radius: 12px;
         margin-bottom: 25px;
-        border: 1px solid #c3e6cb;
+        border: 1px solid #bbf7d0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 868px) {
+        .contact-hero-vibrant {
+            grid-template-columns: 1fr;
+            padding: 40px 24px;
+            gap: 25px;
+        }
     }
 </style>
 
-<div class="contact-hero">
-    <h2><i class="fa-solid fa-envelope-open-text"></i> Get in Touch</h2>
-    <p>Have questions, ideas, or want to collaborate with Boys Foundation? We'd love to hear from you!</p>
-</div>
+<div class="contact-wrapper">
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert-success">
-            <i class="fa-solid fa-circle-check"></i> {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-<div class="contact-grid">
-    <!-- Contact Info Column -->
-    <div class="contact-info-card">
-        <h3><i class="fa-solid fa-address-card"></i> Contact Details</h3>
-
-        <div class="info-box">
-            <i class="fa-solid fa-building-ngo"></i>
-            <div class="info-content">
-                <h4>Organization</h4>
-                <p>Best_One_Young_Society</p>
-                <p><small>Trust Reg. No: 455/2024</small></p>
+    <!-- GRADIENT HERO BANNER -->
+    <div class="contact-hero-vibrant">
+        <div class="hero-text-side">
+            <h2>Get in Touch with Our Team</h2>
+            <p>Have questions, ideas, volunteering interests, or want to collaborate with Best One Young Society? We are here to help!</p>
+            
+            <div class="contact-hero-badges">
+                <span class="hero-tag"><i class="fa-solid fa-clock" style="color: #4ade80;"></i> Quick Response</span>
+                <span class="hero-tag"><i class="fa-solid fa-handshake" style="color: #60a5fa;"></i> Open for Partnerships</span>
             </div>
         </div>
 
-        <div class="info-box">
-            <i class="fa-solid fa-location-dot"></i>
-            <div class="info-content">
-                <h4>Address</h4>
-                <p>Kovur, Nellore, Andhra Pradesh</p>
-            </div>
-        </div>
-
-        <div class="info-box">
-            <i class="fa-solid fa-phone"></i>
-            <div class="info-content">
-                <h4>Phone / WhatsApp</h4>
-                <p>+91 8499938804</p>
-            </div>
-        </div>
-
-        <div class="info-box">
-            <i class="fa-solid fa-envelope"></i>
-            <div class="info-content">
-                <h4>Email</h4>
-                <p>boysfoundation2016@gmail.com</p>
-            </div>
+        <div class="hero-quick-action">
+            <div class="quick-status-dot">Online & Active</div>
+            <p style="color: #e2e8f0; margin-bottom: 15px; font-size: 0.95rem;">Need immediate support or have an emergency blood drive request?</p>
+            <a href="https://wa.me/918499938804" target="_blank" class="quick-contact-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
         </div>
     </div>
 
-    <!-- Contact Form Column -->
-    <div class="contact-form-card">
-        <h3><i class="fa-solid fa-paper-plane"></i> Send Us a Message</h3>
-        <form method="POST" action="/contact/">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Your Name *</label>
-                <input type="text" id="name" name="name" required placeholder="Full Name">
+    <!-- DJANGO MESSAGES -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert-success">
+                <i class="fa-solid fa-circle-check"></i> {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- CONTACT GRID -->
+    <div class="contact-grid">
+        
+        <!-- CONTACT DETAILS -->
+        <div class="contact-info-card">
+            <h3>
+                <i class="fa-solid fa-address-card"></i>
+                <span>Official Details</span>
+            </h3>
+
+            <div class="info-box">
+                <i class="fa-solid fa-building-ngo"></i>
+                <div class="info-content">
+                    <h4>Organization</h4>
+                    <p><strong>Best One Young Society</strong></p>
+                    <p><small style="color: #16a34a; font-weight: 700;">Trust Reg. No: 455/2024</small></p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required placeholder="name@example.com">
+            <div class="info-box">
+                <i class="fa-solid fa-location-dot"></i>
+                <div class="info-content">
+                    <h4>Main Headquarters</h4>
+                    <p>Kovur, Nellore District, Andhra Pradesh, India</p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" placeholder="+91 9876543210">
+            <div class="info-box">
+                <i class="fa-solid fa-phone"></i>
+                <div class="info-content">
+                    <h4>Phone / WhatsApp</h4>
+                    <p><a href="https://wa.me/918499938804" target="_blank" class="info-link">+91 8499938804</a></p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input type="text" id="subject" name="subject" required placeholder="Inquiry / Volunteering / General">
+            <div class="info-box">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="info-content">
+                    <h4>Official Email</h4>
+                    <p><a href="mailto:boysfoundation2016@gmail.com" class="info-link">boysfoundation2016@gmail.com</a></p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="message">Your Message *</label>
-                <textarea id="message" name="message" rows="4" required placeholder="How can we help you?"></textarea>
+            <!-- MAP EMBED -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15431.119283733075!2d79.9723238!3d14.4958153!2m3!1f0!0f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4c8cc38d211f37%3A0xb3e64c398dfeb3c2!2sKovur%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="180" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
+        </div>
 
-            <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
-        </form>
+        <!-- MESSAGE FORM -->
+        <div class="contact-form-card" style="border-top-color: #1e3a8a;">
+            <h3 style="color: #0f172a;">
+                <i class="fa-solid fa-paper-plane" style="background: #eff6ff; color: #1e3a8a; border-color: #dbeafe;"></i>
+                <span>Send Us a Message</span>
+            </h3>
+
+            <form method="POST" action="/contact/">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Full Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="+91 9876543210">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Inquiry / Volunteering / General">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="How can we help or work together?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+
     </div>
+
 </div>
 {% endblock content %}
