@@ -464,31 +464,47 @@
     </div>
 </div>
 
+<!-- UPCOMING EVENTS SECTION -->
 {% if upcoming_events %}
-<section class="events-section" style="width: 100%; margin: 40px 0;">
-    <div style="text-align: center; margin-bottom: 25px;">
-        <span style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 6px 16px; border-radius: 30px; font-size: 0.88rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+<section class="events-section" style="width: 100%; margin: 45px 0; box-sizing: border-box;">
+    <!-- Section Header -->
+    <div style="text-align: center; margin-bottom: 30px;">
+        <span style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 6px 18px; border-radius: 30px; font-size: 0.88rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
             <i class="fa-solid fa-bullhorn"></i> Mark Your Calendar
         </span>
-        <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-top: 10px;">Upcoming Events & Drives</h2>
+        <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-top: 10px; margin-bottom: 0;">Upcoming Events & Drives</h2>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+    <!-- Event Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; justify-content: center; align-items: start;">
         {% for event in upcoming_events %}
-            <div style="background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+            <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                
+                <!-- Poster Frame Container -->
                 {% if event.poster %}
-                    <img src="{{ event.poster.url }}" alt="{{ event.title }}" style="width: 100%; height: auto; max-height: 450px; object-fit: cover; display: block;">
+                    <div style="background-color: #0f172a; width: 100%; height: 420px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                        <!-- Blurred Background Layer for Filler -->
+                        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('{{ event.poster.url }}'); background-size: cover; background-position: center; filter: blur(12px) opacity(0.35);"></div>
+                        
+                        <!-- Crisp Main Event Poster -->
+                        <img src="{{ event.poster.url }}" alt="{{ event.title }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; position: relative; z-index: 1; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                    </div>
                 {% endif %}
 
-                <div style="padding: 20px;">
-                    <div style="color: #16a34a; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-calendar-days"></i> {{ event.event_date|date:"F d, Y" }}
+                <!-- Event Info Body -->
+                <div style="padding: 24px;">
+                    <div style="color: #16a34a; font-weight: 800; font-size: 0.92rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-calendar-days" style="background: #f0fdf4; padding: 6px; border-radius: 50%; border: 1px solid #dcfce7;"></i> 
+                        {{ event.event_date|date:"F d, Y" }}
                     </div>
-                    <h3 style="margin: 0 0 8px 0; color: #0f172a; font-size: 1.25rem;">{{ event.title }}</h3>
+                    
+                    <h3 style="margin: 8px 0 10px 0; color: #0f172a; font-size: 1.3rem; font-weight: 700; line-height: 1.35;">{{ event.title }}</h3>
+                    
                     {% if event.description %}
-                        <p style="color: #64748b; font-size: 0.95rem; margin: 0; line-height: 1.5;">{{ event.description }}</p>
+                        <p style="color: #64748b; font-size: 0.96rem; margin: 0; line-height: 1.6;">{{ event.description }}</p>
                     {% endif %}
                 </div>
+
             </div>
         {% endfor %}
     </div>
