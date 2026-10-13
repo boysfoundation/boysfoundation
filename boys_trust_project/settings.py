@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
 
 # Application definition
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -180,65 +179,3 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # Always use your verified Gmail address as the sender
 DEFAULT_FROM_EMAIL = 'Boys Foundation <boysfoundation2016@gmail.com>'
 
-JAZZMIN_SETTINGS = {
-    # Title on the browser tab
-    "site_title": "Boys Foundation Admin",
-
-    # Title on the login screen
-    "site_header": "Boys Foundation",
-
-    # Brand name at the top left header
-    "site_brand": "Best One Young Society",
-
-    # Relative path inside your static folder
-    "site_logo": "logo.png",
-
-    # Logo shown on the login page
-    "login_logo": "logo.png",
-
-    # Welcome text on the login screen
-    "welcome_sign": "Welcome to Boys Foundation Portal",
-
-    # Copyright notice in footer
-    "copyright": "Best One Young Society (Reg. No: 455/2024)",
-
-    # --- FORCE NAVIGATION TO STAY EXPANDED ON ALL PAGES ---
-    "navigation_expanded": True,
-    "custom_css": "custom_admin.css",
-
-    # Enables live interactive theme builder
-    "show_ui_builder": True,
-    "custom_js": "data:text/javascript,document.addEventListener('DOMContentLoaded',function(){document.body.classList.remove('sidebar-collapse');localStorage.removeItem('remember');});"
-}
-# --- ADD THIS BLOCK TO FIX LAYOUT & ALIGNMENT ---
-JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": False,
-    "brand_small_text": False,
-    "brand_colour": False,
-    "accent": "accent-primary",
-    "navbar": "navbar-white navbar-light",
-    "no_navbar_border": False,
-    "navbar_fixed": True,
-    "layout_boxed": False,
-    "footer_fixed": False,
-    "sidebar_fixed": False,  # Changed from True to False
-    "sidebar": "sidebar-dark-primary",
-    "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": True,
-    "sidebar_nav_child_indent": False,
-    "sidebar_nav_compact_style": False,
-    "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": False,
-    "theme": "default",
-    "dark_mode_theme": None,
-    "button_classes": {
-        "primary": "btn-outline-primary",
-        "secondary": "btn-outline-secondary",
-        "info": "btn-info",
-        "warning": "btn-warning",
-        "danger": "btn-danger",
-        "success": "btn-success"
-    }
-}
