@@ -1,11 +1,15 @@
 {% extends "admin/base.html" %}
 {% load static %}
 
+{% block head %}
+{{ block.super }}
+<!-- Favicon overrides for all browsers -->
+<link rel="icon" type="image/png" href="{% static 'logo.png' %}?v=2">
+<link rel="shortcut icon" type="image/png" href="{% static 'logo.png' %}?v=2">
+<link rel="apple-touch-icon" href="{% static 'logo.png' %}?v=2">
+{% endblock %}
+
 {% block extrahead %}
 {{ block.super }}
-<!-- Add your logo as the browser favicon -->
-<link rel="shortcut icon" type="image/png" href="{% static 'logo.png' %}">
-
-<!-- Custom styling -->
-<link rel="stylesheet" type="text/css" href="{% static 'unfold_fix.css' %}">
+<link rel="stylesheet" type="type/css" href="{% static 'unfold_fix.css' %}?v=2">
 {% endblock %}
