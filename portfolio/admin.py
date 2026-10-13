@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Project, ProjectImage, ContactMessage, DonationPayment
+from .models import BloodDonor
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -18,3 +19,9 @@ class ContactMessageAdmin(admin.ModelAdmin):
 @admin.register(DonationPayment)
 class DonationPaymentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'amount', 'status', 'created_at')
+
+@admin.register(BloodDonor)
+class BloodDonorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'blood_group', 'phone', 'location', 'date_registered')
+    list_filter = ('blood_group', 'location')
+    search_fields = ('name', 'phone', 'location')

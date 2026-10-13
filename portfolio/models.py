@@ -52,3 +52,27 @@ class DonationPayment(models.Model):
 
     def __str__(self):
         return f'{self.name} - ₹{self.amount} ({self.status})'
+
+class BloodDonor(models.Model):
+    BLOOD_GROUPS = [
+        ('A+', 'A+'),
+        ('A-', 'A-'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+    ]
+
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
+    location = models.CharField(max_length=100, default='Kovur')
+    date_registered = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date_registered']
+
+    def __str__(self):
+        return f"{self.name} ({self.blood_group}) - {self.location}"

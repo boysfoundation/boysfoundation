@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 import requests
 from .models import ContactMessage, DonationPayment, Project
+from .models import BloodDonor
 
 logger = logging.getLogger(__name__)
 
@@ -232,3 +233,25 @@ def project_list(request):
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
     return render(request, 'portfolio/project_detail.html', {'project': project})
+
+
+def blood_support(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        blood_group = request.POST.get('blood_group')
+        location = request.POST.get('location', 'Kovur')
+
+        if name and phone and blood_group:
+            BloodDonor.objects.create(
+                name=name,
+                phone=phone,
+                blood_group=blood_group,
+                location=location
+            )
+            messages.success(request, "Thank you for registering as a voluntary blood donor! Your support saves lives.")
+            return redirect('blood_support')
+        else:
+            messages.error(request, "Please fill in all required fields.")
+
+    return render(request, 'portfolio/blood_support.html')
