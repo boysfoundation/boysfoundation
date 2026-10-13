@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -178,3 +179,23 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # Always use your verified Gmail address as the sender
 DEFAULT_FROM_EMAIL = 'Boys Foundation <boysfoundation2016@gmail.com>'
+
+JAZZMIN_SETTINGS = {
+    # Title on the browser tab
+    "site_title": "Boys Foundation Admin",
+
+    # Title on the login screen
+    "site_header": "Boys Foundation",
+
+    # Brand name at the top left header
+    "site_brand": "Best One Young Society",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to Boys Foundation Portal",
+
+    # Copyright notice in footer
+    "copyright": "Best One Young Society (Reg. No: 455/2024)",
+
+    # Enables live interactive theme builder in the top right corner
+    "show_ui_builder": True,
+}
