@@ -15,30 +15,31 @@
     }
 
     /* Hero Banner Container */
-    .hero-container {
+.hero-container {
         position: relative;
-        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-        color: #ffffff;
-        padding: 80px 25px;
+        background-color: #ffffff;
+        color: #0f172a;
+        padding: 75px 25px;
         border-radius: 20px;
         text-align: center;
-        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         margin-bottom: 45px;
         overflow: hidden;
+        border: 1px solid #e2e8f0;
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* Watermark Logo Styling */
+    /* Seamless Watermark Logo Overlay */
     .hero-logo-watermark {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 420px;
-        height: 420px;
+        width: 360px;
+        height: 360px;
         object-fit: contain;
-        opacity: 0.08; /* Subtle watermark blending */
+        opacity: 0.12; /* Subtle blending into white background */
         pointer-events: none;
         z-index: 0;
     }
@@ -54,30 +55,29 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(8px);
+        background: #f0fdf4;
         padding: 6px 18px;
         border-radius: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid #bbf7d0;
         font-size: 0.88rem;
-        font-weight: 600;
-        color: #86efac;
+        font-weight: 700;
+        color: #166534;
         margin-bottom: 20px;
     }
 
     .hero-container h1 {
-        font-size: 2.8rem;
+        font-size: 2.7rem;
         font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 18px;
+        color: #1e3a8a; /* Deep Navy Blue matching logo text */
+        margin-bottom: 16px;
         letter-spacing: -0.5px;
         line-height: 1.25;
     }
 
     .hero-container p {
-        font-size: 1.15rem;
-        color: #cbd5e1;
-        margin: 0 auto 32px auto;
+        font-size: 1.12rem;
+        color: #475569;
+        margin: 0 auto 30px auto;
         line-height: 1.65;
     }
 
@@ -89,14 +89,14 @@
     }
 
     .btn-primary-custom {
-        background-color: #16a34a; /* Vibrant Trust Green */
+        background-color: #16a34a; /* Logo Green */
         color: #ffffff;
         padding: 14px 32px;
         border-radius: 30px;
         font-weight: 700;
         text-decoration: none;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -105,14 +105,14 @@
     .btn-primary-custom:hover {
         background-color: #15803d;
         transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
+        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
         color: #ffffff;
     }
 
     .btn-secondary-custom {
-        border: 2px solid rgba(255, 255, 255, 0.4);
+        background-color: #1e293b;
         color: #ffffff;
-        padding: 12px 28px;
+        padding: 14px 30px;
         border-radius: 30px;
         font-weight: 700;
         text-decoration: none;
@@ -120,13 +120,13 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        box-shadow: 0 4px 12px rgba(30, 41, 59, 0.15);
     }
 
     .btn-secondary-custom:hover {
-        background-color: #ffffff;
-        color: #0f172a;
-        border-color: #ffffff;
+        background-color: #0f172a;
         transform: translateY(-2px);
+        color: #ffffff;
     }
 
     /* Impact Stats Bar */
@@ -364,22 +364,22 @@
 <div class="home-wrapper">
 
     <!-- HERO BANNER -->
-    <div class="hero-container">
-        <img src="{% static 'logo.png' %}" alt="Trust Logo Watermark" class="hero-logo-watermark">
+<div class="hero-container">
+    <img src="{% static 'logo.png' %}" alt="Trust Logo Watermark" class="hero-logo-watermark">
 
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fa-solid fa-sparkles"></i> Empowering Communities & Youth
-            </div>
-            <h1>Making a Lasting Difference with Best One Young Society</h1>
-            <p>Dedicated to serving the underprivileged, promoting youth empowerment, and providing direct community welfare assistance across society.</p>
-            
-            <div class="hero-buttons">
-                <a href="/donate/" class="btn-primary-custom"><i class="fa-solid fa-heart"></i> Support Our Mission</a>
-                <a href="/portfolio/" class="btn-secondary-custom"><i class="fa-solid fa-briefcase"></i> Explore Portfolio</a>
-            </div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fa-solid fa-sparkles"></i> Empowering Communities & Youth
+        </div>
+        <h1>Making a Lasting Difference with Best One Young Society</h1>
+        <p>Dedicated to serving the underprivileged, promoting youth empowerment, and providing direct community welfare assistance across society.</p>
+        
+        <div class="hero-buttons">
+            <a href="/donate/" class="btn-primary-custom"><i class="fa-solid fa-heart"></i> Support Our Mission</a>
+            <a href="/portfolio/" class="btn-secondary-custom"><i class="fa-solid fa-briefcase"></i> Explore Portfolio</a>
         </div>
     </div>
+</div>
 
     <!-- IMPACT STATS COUNTER -->
     <div class="impact-stats-grid">
