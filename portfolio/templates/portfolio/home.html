@@ -475,15 +475,15 @@
         <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-top: 10px; margin-bottom: 0;">Upcoming Events & Drives</h2>
     </div>
 
-    <!-- Event Cards Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; justify-content: center; align-items: start;">
+    <!-- Centered Flex Wrapper (Max 3 per row) -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; width: 100%; box-sizing: border-box;">
         {% for event in upcoming_events %}
-            <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; flex: 1 1 300px; max-width: 380px; min-width: 280px; box-sizing: border-box;">
                 
                 <!-- Poster Frame Container -->
                 {% if event.poster %}
-                    <div style="background-color: #0f172a; width: 100%; height: 420px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-                        <!-- Blurred Background Layer for Filler -->
+                    <div style="background-color: #0f172a; width: 100%; height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                        <!-- Blurred Background Layer -->
                         <div style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('{{ event.poster.url }}'); background-size: cover; background-position: center; filter: blur(12px) opacity(0.35);"></div>
                         
                         <!-- Crisp Main Event Poster -->
@@ -492,16 +492,16 @@
                 {% endif %}
 
                 <!-- Event Info Body -->
-                <div style="padding: 24px;">
-                    <div style="color: #16a34a; font-weight: 800; font-size: 0.92rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                <div style="padding: 20px;">
+                    <div style="color: #16a34a; font-weight: 800; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-calendar-days" style="background: #f0fdf4; padding: 6px; border-radius: 50%; border: 1px solid #dcfce7;"></i> 
                         {{ event.event_date|date:"F d, Y" }}
                     </div>
                     
-                    <h3 style="margin: 8px 0 10px 0; color: #0f172a; font-size: 1.3rem; font-weight: 700; line-height: 1.35;">{{ event.title }}</h3>
+                    <h3 style="margin: 8px 0 10px 0; color: #0f172a; font-size: 1.2rem; font-weight: 700; line-height: 1.35;">{{ event.title }}</h3>
                     
                     {% if event.description %}
-                        <p style="color: #64748b; font-size: 0.96rem; margin: 0; line-height: 1.6;">{{ event.description }}</p>
+                        <p style="color: #64748b; font-size: 0.94rem; margin: 0; line-height: 1.55;">{{ event.description }}</p>
                     {% endif %}
                 </div>
 
