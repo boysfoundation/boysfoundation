@@ -4,6 +4,10 @@ from .models import BloodDonor
 from .models import TeamMember, Award  # plus your existing Project model
 from .models import Event
 
+admin.site.site_header = "Boys Foundation Administration"
+admin.site.site_title = "Boys Foundation Portal"
+admin.site.index_title = "Welcome to Boys Foundation Dashboard"
+
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
     extra = 3  # Displays 3 empty upload slots by default for additional images
