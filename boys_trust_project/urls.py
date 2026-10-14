@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.static import serve
 from portfolio import views
+from django.urls import path, include
+from django.views.generic.base import RedirectView  # <--- Make sure this line is present
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/logo.png')),
