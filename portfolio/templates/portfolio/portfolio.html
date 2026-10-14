@@ -1,6 +1,6 @@
 {% extends 'portfolio/base.html' %}
 
-{% block title %}Our Impact, Awards & Team | Boys Foundation{% endblock title %}
+{% block title %}Our Impact & Awards | Boys Foundation{% endblock title %}
 
 {% block content %}
     <style>
@@ -130,7 +130,7 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            padding: 0; /* Ensures image touches top border */
+            padding: 0;
         }
         .project-card:hover {
             transform: translateY(-5px);
@@ -138,37 +138,33 @@
             border-color: #cbd5e1;
         }
 
-/* FIXED FULL-BLEED IMAGE CONTAINER */
-.project-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    background: #f1f5f9;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    border-top-left-radius: 13px;  /* Matches project card top curve */
-    border-top-right-radius: 13px;
-}
-
-.project-image-wrapper a {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.project-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 0.4s ease;
-}
-
-.project-card:hover .project-image-wrapper img {
-    transform: scale(1.04);
-}
+        .project-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #f1f5f9;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+        }
+        .project-image-wrapper a {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .project-card:hover .project-image-wrapper img {
+            transform: scale(1.04);
+        }
 
         .project-body {
             padding: 22px;
@@ -260,90 +256,6 @@
             margin: 0;
         }
 
-/* GRID WITH A MAXIMUM LIMIT OF 5 COLUMNS PER ROW */
-.team-grid {
-    display: grid;
-    /* Automatically fits up to 5 equal-width columns per row, min-width 200px per card */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    /* Limits the grid to a maximum of 5 columns */
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 20px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Fallback for smaller screens so it auto-adjusts nicely on tablets/phones */
-@media (max-width: 1024px) {
-    .team-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-.team-card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 28px 20px;
-    text-align: center;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.08);
-    border-color: #cbd5e1;
-}
-
-.team-avatar-container {
-            position: relative;
-            width: 105px;
-            height: 105px;
-            margin: 0 auto 16px auto;
-        }
-        .team-avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #16a34a;
-            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.15);
-        }
-        .team-avatar-placeholder {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #f1f5f9;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            border: 3px solid #cbd5e1;
-        }
-        .team-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 0 0 4px 0;
-        }
-        .team-role {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #16a34a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-        .team-bio {
-            font-size: 0.86rem;
-            color: #64748b;
-            line-height: 1.45;
-            margin: 0;
-        }
-
         .empty-placeholder {
             grid-column: 1 / -1;
             text-align: center;
@@ -363,8 +275,8 @@
 
         <!-- HERO HEADER -->
         <div class="portfolio-hero">
-            <h1>Our Impact, Honors & Team</h1>
-            <p>Empowering local youth and driving impactful community development through social drives, transparent service, and dedicated leadership.</p>
+            <h1>Our Impact & Honors</h1>
+            <p>Empowering local youth and driving impactful community development through social drives, transparent service, and dedicated initiatives.</p>
             
             <div class="hero-stats">
                 <div class="stat-badge">
@@ -374,10 +286,6 @@
                 <div class="stat-badge">
                     <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i>
                     <span>10+ Recognitions</span>
-                </div>
-                <div class="stat-badge">
-                    <i class="fa-solid fa-users" style="color: #4ade80;"></i>
-                    <span>{{ team_members|length }} Core Members</span>
                 </div>
             </div>
         </div>
@@ -392,9 +300,6 @@
             </button>
             <button class="tab-btn" onclick="filterPortfolio('awards', this)">
                 <i class="fa-solid fa-award"></i> Awards & Recognition
-            </button>
-            <button class="tab-btn" onclick="filterPortfolio('team', this)">
-                <i class="fa-solid fa-user-group"></i> Key Members
             </button>
         </div>
 
@@ -411,7 +316,7 @@
                     <div class="project-card">
                         {% if project.image %}
                             <div class="project-image-wrapper">
-                                <a href="{% url 'project_detail' project.pk %}" style="width: 100%; height: 100%; display: block;">
+                                <a href="{% url 'project_detail' project.pk %}">
                                     <img src="{{ project.image.url }}" alt="{{ project.title }}">
                                 </a>
                             </div>
@@ -481,43 +386,6 @@
             </div>
         </div>
 
-        <!-- SECTION 3: KEY MEMBERS & VOLUNTEERS -->
-        <div id="section-team" class="portfolio-section">
-            <div class="section-header">
-                <h2 style="color: #15803d;">
-                    <i class="fa-solid fa-users"></i> Core Team & Leaders
-                </h2>
-            </div>
-
-            <div class="team-grid">
-                {% for member in team_members %}
-                    <div class="team-card">
-                        <div class="team-avatar-container">
-                            {% if member.image %}
-                                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-avatar">
-                            {% else %}
-                                <div class="team-avatar-placeholder">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <h3>{{ member.name }}</h3>
-                        <div class="team-role">{{ member.role }}</div>
-                        
-                        {% if member.bio %}
-                            <p class="team-bio">{{ member.bio }}</p>
-                        {% endif %}
-                    </div>
-                {% empty %}
-                    <div class="empty-placeholder">
-                        <i class="fa-solid fa-users-slash" style="font-size: 2rem; margin-bottom: 8px; color: #94a3b8;"></i>
-                        <p style="margin: 0;">Team profiles coming soon.</p>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
     </div>
 
     <!-- JavaScript For Category Tab Switching -->
@@ -530,24 +398,16 @@
 
             const projSection = document.getElementById('section-projects');
             const awardSection = document.getElementById('section-awards');
-            const teamSection = document.getElementById('section-team');
 
             if (category === 'all') {
                 projSection.classList.remove('tab-hidden');
                 awardSection.classList.remove('tab-hidden');
-                teamSection.classList.remove('tab-hidden');
             } else if (category === 'projects') {
                 projSection.classList.remove('tab-hidden');
                 awardSection.classList.add('tab-hidden');
-                teamSection.classList.add('tab-hidden');
             } else if (category === 'awards') {
                 projSection.classList.add('tab-hidden');
                 awardSection.classList.remove('tab-hidden');
-                teamSection.classList.add('tab-hidden');
-            } else if (category === 'team') {
-                projSection.classList.add('tab-hidden');
-                awardSection.classList.add('tab-hidden');
-                teamSection.classList.remove('tab-hidden');
             }
         }
     </script>

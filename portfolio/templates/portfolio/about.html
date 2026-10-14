@@ -1,7 +1,7 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
 
-{% block title %}About Us | Boys Foundation (Best One Young Society){% endblock title %}
+{% block title %}About Us & Core Team | Boys Foundation (Best One Young Society){% endblock title %}
 
 {% block content %}
 <style>
@@ -19,7 +19,7 @@
         position: relative;
         background-color: #ffffff;
         color: #0f172a;
-        padding: 70px 25px 85px 25px; /* Extra bottom padding for floating badge bar */
+        padding: 70px 25px 85px 25px;
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -39,7 +39,7 @@
         width: 380px;
         height: 380px;
         object-fit: contain;
-        opacity: 0.1; /* Subtle blending into white background */
+        opacity: 0.1;
         pointer-events: none;
         z-index: 0;
     }
@@ -54,7 +54,7 @@
     .about-hero h1 {
         font-size: 2.7rem;
         font-weight: 800;
-        color: #1e3a8a; /* Deep Navy Blue matching logo */
+        color: #1e3a8a;
         margin-bottom: 16px;
         letter-spacing: -0.5px;
         line-height: 1.25;
@@ -108,9 +108,7 @@
         border-radius: 0 16px 16px 0;
         margin-bottom: 50px;
         box-shadow: 0 4px 15px rgba(22, 163, 74, 0.05);
-        border-top: 1px solid #bbf7d0;
-        border-right: 1px solid #bbf7d0;
-        border-bottom: 1px solid #bbf7d0;
+        border: 1px solid #bbf7d0;
     }
 
     .impact-quote p {
@@ -195,7 +193,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 28px;
-        margin-bottom: 30px;
+        margin-bottom: 60px;
         width: 100%;
     }
 
@@ -241,6 +239,101 @@
         line-height: 1.65;
         font-size: 0.98rem;
         margin: 0;
+    }
+
+    /* Team Section Styles */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 1024px) {
+        .team-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+
+    .team-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 28px 20px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        transition: all 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+        border-color: #cbd5e1;
+    }
+
+    .team-avatar-container {
+        position: relative;
+        width: 105px;
+        height: 105px;
+        margin: 0 auto 16px auto;
+    }
+
+    .team-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #16a34a;
+        box-shadow: 0 4px 10px rgba(22, 163, 74, 0.15);
+    }
+
+    .team-avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        border: 3px solid #cbd5e1;
+    }
+
+    .team-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 4px 0;
+    }
+
+    .team-role {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #16a34a;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+
+    .team-bio {
+        font-size: 0.86rem;
+        color: #64748b;
+        line-height: 1.45;
+        margin: 0;
+    }
+
+    .empty-placeholder {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 1px dashed #cbd5e1;
+        color: #64748b;
     }
 
     /* Responsive adjustments */
@@ -339,6 +432,40 @@
             <h3>Core Values</h3>
             <p>Grounded in empathy, absolute integrity, community engagement, and unwavering devotion to uplifting those facing vulnerability.</p>
         </div>
+    </div>
+
+    <!-- CORE TEAM & LEADERS SECTION (Moved from Portfolio) -->
+    <div class="section-header" style="margin-top: 50px;">
+        <h2>Core Team & Leaders</h2>
+        <p>Meet the dedicated individuals driving our mission forward.</p>
+    </div>
+
+    <div class="team-grid">
+        {% for member in team_members %}
+            <div class="team-card">
+                <div class="team-avatar-container">
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-avatar">
+                    {% else %}
+                        <div class="team-avatar-placeholder">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <h3>{{ member.name }}</h3>
+                <div class="team-role">{{ member.role }}</div>
+                
+                {% if member.bio %}
+                    <p class="team-bio">{{ member.bio }}</p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="empty-placeholder">
+                <i class="fa-solid fa-users-slash" style="font-size: 2rem; margin-bottom: 8px; color: #94a3b8;"></i>
+                <p style="margin: 0;">Team profiles coming soon.</p>
+            </div>
+        {% endfor %}
     </div>
 
 </div>
