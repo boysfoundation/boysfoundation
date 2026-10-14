@@ -33,14 +33,24 @@ def home(request):
     return render(request, 'portfolio/home.html', context)
 
 
-
 def portfolio(request):
-  projects = Project.objects.all().order_by('order', '-date_posted')
-  return render(request, 'portfolio/portfolio.html', {'projects': projects})
+    projects = Project.objects.all().order_by('order', '-date_posted')
+    awards = Award.objects.all()
+
+    context = {
+        'projects': projects,
+        'awards': awards,
+    }
+    return render(request, 'portfolio/portfolio.html', context)
 
 
 def about(request):
-  return render(request, 'portfolio/about.html')
+    team_members = TeamMember.objects.all()
+
+    context = {
+        'team_members': team_members,
+    }
+    return render(request, 'portfolio/about.html', context)
 
 
 def donate(request):
@@ -267,18 +277,6 @@ def blood_support(request):
 
     return render(request, 'portfolio/blood_support.html')
 
-
-def portfolio(request):
-    projects = Project.objects.all()
-    team_members = TeamMember.objects.all()
-    awards = Award.objects.all()
-
-    context = {
-        'projects': projects,
-        'team_members': team_members,
-        'awards': awards,
-    }
-    return render(request, 'portfolio/portfolio.html', context)
 
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
