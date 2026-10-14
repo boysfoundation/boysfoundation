@@ -5,6 +5,7 @@ from django.views.static import serve
 from portfolio import views
 
 urlpatterns = [
+    path('favicon.ico', RedirectView.as_view(url='/static/logo.png')),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
