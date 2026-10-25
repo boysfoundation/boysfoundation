@@ -589,9 +589,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('main-nav');
+        const header = document.querySelector('header');
         
         if (hamburger && nav) {
-            hamburger.addEventListener('click', function() {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const isActive = nav.classList.toggle('active');
                 hamburger.classList.toggle('active');
                 hamburger.setAttribute('aria-expanded', isActive);
@@ -608,14 +610,12 @@
 
             // Close menu when clicking outside
             document.addEventListener('click', function(event) {
-                if (!header.contains(event.target)) {
+                if (header && !header.contains(event.target)) {
                     nav.classList.remove('active');
                     hamburger.classList.remove('active');
                     hamburger.setAttribute('aria-expanded', 'false');
                 }
             });
-
-            const header = document.querySelector('header');
         }
     });
 </script>
