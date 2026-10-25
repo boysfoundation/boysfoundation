@@ -130,14 +130,14 @@
         @media screen and (max-width: 768px) {
             header {
                 padding: 12px 15px;
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
                 gap: 12px;
             }
 
             .brand-container {
                 gap: 10px;
-                width: 100%;
             }
 
             .brand-container img {
@@ -154,24 +154,73 @@
                 line-height: 1.1;
             }
 
-            /* Clean Horizontal Scrolling Mobile Navbar */
-            nav {
-                width: 100%;
+            /* Hamburger Menu Button */
+            .hamburger {
                 display: flex;
-                overflow-x: auto; /* Enables smooth horizontal swipe for nav links */
-                white-space: nowrap;
-                padding-top: 8px;
-                padding-bottom: 4px;
-                border-top: 1px solid #f1f5f9;
-                gap: 15px;
-                -webkit-overflow-scrolling: touch;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 28px;
+                height: 20px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                z-index: 1001;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 100%;
+                height: 3px;
+                background-color: #1e3a8a;
+                border-radius: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            /* Mobile Navigation Menu */
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px 15px;
+                border-top: 1px solid #e2e8f0;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                display: none;
+                gap: 0;
+                z-index: 1000;
+            }
+
+            nav.active {
+                display: flex;
             }
 
             nav a {
-                margin-left: 0;
-                font-size: 0.85rem;
-                white-space: nowrap;
-                padding: 2px 4px;
+                margin: 0;
+                padding: 12px 0;
+                width: 100%;
+                font-size: 1rem;
+                border-bottom: 1px solid #f1f5f9;
+                white-space: normal;
+            }
+
+            nav a:last-child {
+                border-bottom: none;
             }
 
             /* Global Mobile Text & Card Scale Rules */
@@ -459,7 +508,14 @@
             </div>
         </a>
 
-        <nav>
+        <!-- Hamburger Menu Button (Mobile Only) -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="main-nav">
             <a href="/"><i class="fa-solid fa-house"></i> Home</a>
             <a href="/about/"><i class="fa-solid fa-circle-info"></i> About Us</a>
             <a href="/portfolio/"><i class="fa-solid fa-briefcase"></i> Portfolio</a>
@@ -527,5 +583,41 @@
    title="Chat with us on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<!-- Mobile Navigation Toggle Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('main-nav');
+        
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function() {
+                const isActive = nav.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isActive);
+            });
+
+            // Close menu when clicking a nav link
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!header.contains(event.target)) {
+                    nav.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            const header = document.querySelector('header');
+        }
+    });
+</script>
 </body>
 </html>
